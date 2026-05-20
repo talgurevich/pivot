@@ -1,0 +1,479 @@
+/* Pivot Level — design system tokens */
+
+/* Base reset + page background */
+html, body { margin: 0; padding: 0; }
+html { background: #f0eee9; }
+body {
+  font-family: 'Heebo', sans-serif;
+  overflow-x: hidden;
+}
+#root { min-height: 100vh; }
+.pivot { overflow-x: hidden; width: 100%; }
+
+:root {
+  --blue: #1A2BFB;
+  --blue-deep: #0E1ACC;
+  --blue-100: #E8EAFF;
+  --white: #FFFFFF;
+  --black: #000000;
+  --gray: #8C8C8C;
+  --gray-dark: #4A4A4A;
+  --gray-light: #E8E8E8;
+  --gray-bg: #F5F5F5;
+}
+
+/* Heebo for Hebrew (display + body), Rubik for select UI */
+.pivot {
+  font-family: 'Heebo', 'Rubik', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  direction: rtl;
+  color: #000;
+  background: #fff;
+}
+
+.pivot * {
+  box-sizing: border-box;
+}
+
+.pivot button {
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+.pivot a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.pivot h1, .pivot h2, .pivot h3, .pivot h4, .pivot p {
+  margin: 0;
+  padding: 0;
+  font-weight: inherit;
+}
+
+/* Type scale — fluid (scales down on small screens) */
+.pivot-h1 { font-size: clamp(44px, 7vw, 88px); line-height: 0.96; font-weight: 900; letter-spacing: -0.03em; }
+.pivot-h2 { font-size: clamp(33px, 5.6vw, 64px); line-height: 1; font-weight: 900; letter-spacing: -0.025em; }
+.pivot-h3 { font-size: clamp(26px, 3.6vw, 40px); line-height: 1.08; font-weight: 800; letter-spacing: -0.02em; }
+.pivot-h4 { font-size: clamp(20px, 2vw, 24px); line-height: 1.2; font-weight: 700; letter-spacing: -0.01em; }
+.pivot-lead { font-size: 22px; line-height: 1.45; font-weight: 400; }
+.pivot-body { font-size: 17px; line-height: 1.55; font-weight: 400; }
+.pivot-small { font-size: 14px; line-height: 1.5; font-weight: 500; }
+.pivot-eyebrow {
+  font-size: 12px; line-height: 1; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  font-family: 'Rubik', sans-serif;
+}
+.pivot-mono {
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+/* Type scale — mobile */
+.pivot-m-h1 { font-size: 48px; line-height: 0.95; font-weight: 900; letter-spacing: -0.025em; }
+.pivot-m-h2 { font-size: 36px; line-height: 1; font-weight: 900; letter-spacing: -0.02em; }
+.pivot-m-h3 { font-size: 24px; line-height: 1.15; font-weight: 800; letter-spacing: -0.01em; }
+.pivot-m-lead { font-size: 18px; line-height: 1.45; font-weight: 400; }
+.pivot-m-body { font-size: 16px; line-height: 1.55; font-weight: 400; }
+
+/* Buttons */
+.pivot-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 56px;
+  padding: 0 28px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: transform 0.22s cubic-bezier(0.2, 0.7, 0.3, 1), background 0.18s ease, box-shadow 0.22s ease;
+  white-space: nowrap;
+  position: relative;
+}
+.pivot-btn:hover { transform: translateY(-2px); }
+.pivot-btn:active { transform: translateY(0); }
+.pivot-btn-white {
+  background: #fff;
+  color: #1A2BFB;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08), 0 12px 28px -10px rgba(0,0,0,0.18);
+}
+.pivot-btn-white:hover { box-shadow: 0 8px 22px rgba(0,0,0,0.12), 0 20px 40px -10px rgba(0,0,0,0.28); }
+.pivot-btn-blue {
+  background: #1A2BFB;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(26,43,251,0.25), 0 12px 28px -10px rgba(26,43,251,0.35);
+}
+.pivot-btn-blue:hover {
+  background: #0E1ACC;
+  box-shadow: 0 8px 22px rgba(26,43,251,0.3), 0 20px 40px -10px rgba(26,43,251,0.4);
+}
+.pivot-btn-black { background: #000; color: #fff; }
+.pivot-btn-ghost-white {
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.3);
+  backdrop-filter: blur(8px);
+}
+.pivot-btn-ghost-white:hover {
+  background: rgba(255,255,255,0.12);
+  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.5);
+}
+.pivot-btn-ghost-dark {
+  background: transparent; color: #000;
+  box-shadow: inset 0 0 0 1.5px rgba(0,0,0,0.15);
+}
+
+.pivot-btn-sm { height: 44px; padding: 0 20px; font-size: 15px; }
+
+/* Tag/pill */
+.pivot-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  backdrop-filter: blur(8px);
+}
+.pivot-tag-dark {
+  background: #E8E8E8;
+  color: #000;
+}
+.pivot-tag-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #fff;
+}
+
+/* Divider rule */
+.pivot-rule {
+  height: 1px;
+  background: #E8E8E8;
+  border: none;
+}
+
+/* Section vertical rhythm */
+.pivot-section {
+  padding: clamp(64px, 9vw, 120px) clamp(20px, 5vw, 80px);
+}
+.pivot-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Mobile sections */
+.pivot-m-section {
+  padding: 56px 20px;
+}
+
+/* ============================================================
+   ANIMATIONS — marquee, ticker, pulse
+   ============================================================ */
+@keyframes pivot-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(50%); }
+}
+.pivot-marquee {
+  display: flex;
+  width: max-content;
+  animation: pivot-marquee 40s linear infinite;
+}
+.pivot-marquee-slow { animation-duration: 60s; }
+.pivot-marquee-fast { animation-duration: 25s; }
+
+@keyframes pivot-pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.6); }
+}
+.pivot-pulse-dot {
+  animation: pivot-pulse-dot 1.6s ease-in-out infinite;
+}
+
+@keyframes pivot-rise {
+  0% { transform: translateY(8px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* ============================================================
+   HERO BACKGROUND — layered blue mesh
+   ============================================================ */
+
+@keyframes pivot-blob-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(60px, -40px) scale(1.08); }
+  66%      { transform: translate(-40px, 30px) scale(0.95); }
+}
+@keyframes pivot-blob-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(-80px, 50px) scale(1.1); }
+  66%      { transform: translate(40px, -60px) scale(0.92); }
+}
+@keyframes pivot-blob-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(50px, 80px) scale(1.15); }
+}
+@keyframes pivot-hue-shift {
+  0%, 100% { filter: hue-rotate(0deg); }
+  50%      { filter: hue-rotate(8deg); }
+}
+
+.pivot-hero-bg {
+  position: absolute; inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  background: #1A2BFB;
+  isolation: isolate;
+}
+.pivot-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+/* Dotted grid overlay */
+.pivot-hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(rgba(255,255,255,0.18) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: 0 0;
+  opacity: 0.5;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.6) 100%);
+  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.6) 100%);
+}
+.pivot-hero-noise {
+  position: absolute; inset: 0;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1   0 0 0 0 1   0 0 0 0 1   0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* Light leaks — soft directional gradients to add depth without using new colors */
+.pivot-hero-leak-top {
+  position: absolute; top: -200px; right: -100px;
+  width: 800px; height: 600px;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.18) 0%, transparent 60%);
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.pivot-hero-leak-bottom {
+  position: absolute; bottom: -100px; left: -100px;
+  width: 700px; height: 500px;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.12) 0%, transparent 60%);
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+/* Horizontal gradient lines (subtle, only at edges) */
+.pivot-hero-rays {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.18) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.3) 100%);
+}
+
+/* ============================================================
+   GLASS / MATERIAL UTILITIES
+   ============================================================ */
+
+.pivot-glass {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.pivot-glass-dark {
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Premium card — elevated white with hairline border + soft shadow stack */
+.pivot-card-premium {
+  background: #fff;
+  border-radius: 24px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.04),
+    0 8px 24px -4px rgba(0,0,0,0.08),
+    0 24px 60px -16px rgba(0,0,0,0.1);
+}
+
+/* Soft hairline divider */
+.pivot-hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.12) 50%, transparent 100%);
+  border: none;
+}
+.pivot-hairline-light {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+}
+
+/* Mono numerals */
+.pivot-tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+/* Vertical text rotation */
+.pivot-vertical-tag {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+/* Premium pill — refined inline label */
+.pivot-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.pivot-pill-dark {
+  background: rgba(0,0,0,0.06);
+  border-color: rgba(0,0,0,0.12);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* ============================================================
+   EDITORIAL UTILITIES
+   ============================================================ */
+
+.pivot-display {
+  font-size: clamp(120px, 14vw, 220px);
+  line-height: 0.82;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+.pivot-display-tight {
+  font-size: clamp(140px, 17vw, 280px);
+  line-height: 0.75;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+}
+
+.pivot-mega-num {
+  font-family: 'Heebo', sans-serif;
+  font-size: clamp(56px, 20vw, 380px);
+  line-height: 0.78;
+  font-weight: 900;
+  letter-spacing: -0.07em;
+}
+
+/* Outline text (great for layering) */
+.pivot-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px currentColor;
+  text-stroke: 2px currentColor;
+}
+
+/* Sticky note style cards */
+.pivot-note {
+  background: #fff;
+  padding: 18px 22px;
+  border-radius: 12px;
+  font-weight: 700;
+  box-shadow: 0 12px 28px -8px rgba(0,0,0,0.18);
+}
+
+/* Hero choreography:
+   1. the "בוואטסאפ" pill flies in from the right and bumps the logo
+   2. on impact (~1s) the logo gets knocked, then swivels twice */
+@keyframes pivot-pill-flyin {
+  0%   { transform: translateX(1200px); }
+  70%  { transform: translateX(-16px); }   /* overshoots into the logo */
+  85%  { transform: translateX(7px); }
+  100% { transform: translateX(0); }
+}
+.pivot-pill-flyin {
+  animation: pivot-pill-flyin 0.9s cubic-bezier(0.22, 0.7, 0.3, 1) 0.35s both;
+  will-change: transform;
+}
+
+@keyframes pivot-logo-knock {
+  0%   { transform: translateX(0); }
+  35%  { transform: translateX(-12px); }
+  100% { transform: translateX(0); }
+}
+.pivot-logo-knock {
+  animation: pivot-logo-knock 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) 1s both;
+}
+
+@keyframes pivot-logo-swivel {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(720deg); }
+}
+.pivot-logo-coin {
+  animation: pivot-logo-swivel 2.4s cubic-bezier(0.33, 0.78, 0.32, 1) 1s 1 both;
+}
+
+/* Scroll reveal — sections rise + fade as they scroll into view */
+.pivot-reveal {
+  opacity: 0;
+  transform: translateY(56px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.75, 0.25, 1),
+              transform 0.9s cubic-bezier(0.2, 0.75, 0.25, 1);
+  will-change: opacity, transform;
+}
+.pivot-reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pivot-reveal,
+  .pivot-reveal.is-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Hero columns — fly in from their respective sides on load */
+@keyframes pivot-fly-from-right {
+  from { opacity: 0; transform: translateX(160px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes pivot-fly-from-left {
+  from { opacity: 0; transform: translateX(-160px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.pivot-fly-right {
+  animation: pivot-fly-from-right 0.95s cubic-bezier(0.22, 0.7, 0.3, 1) 0.55s both;
+}
+.pivot-fly-left {
+  animation: pivot-fly-from-left 0.95s cubic-bezier(0.22, 0.7, 0.3, 1) 0.55s both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pivot-fly-right,
+  .pivot-fly-left { animation: none; }
+}
