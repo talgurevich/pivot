@@ -290,7 +290,6 @@ const HERO_STICKERS = [
 function Hero({ blue }) {
   const isMobile = useIsMobile();
   const navCompact = useIsMobile(940);
-  const [scrollY, setScrollY] = useStateWeb(0);
 
   // Replay the phone + sticker fly-in every time the hero scrolls into view.
   const stageRef = React.useRef(null);
@@ -308,17 +307,27 @@ function Hero({ blue }) {
     io.observe(el);
     return () => io.disconnect();
   }, []);
+
+  // Ghost-text parallax — direct DOM mutation via ref to avoid re-rendering
+  // the whole hero subtree on every scroll frame (which can make scroll feel
+  // unresponsive on weaker devices).
+  const ghostRef = React.useRef(null);
   React.useEffect(() => {
     let raf = 0;
+    const apply = () => {
+      raf = 0;
+      const el = ghostRef.current;
+      if (el) {
+        const sy = window.scrollY || window.pageYOffset || 0;
+        el.style.transform = `translateY(${sy * 0.34}px)`;
+      }
+    };
     const onScroll = () => {
       if (raf) return;
-      raf = requestAnimationFrame(() => {
-        raf = 0;
-        setScrollY(window.scrollY || window.pageYOffset || 0);
-      });
+      raf = requestAnimationFrame(apply);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    apply();
     return () => {
       window.removeEventListener('scroll', onScroll);
       if (raf) cancelAnimationFrame(raf);
@@ -429,8 +438,8 @@ function Hero({ blue }) {
             כל הספקים<br/>
             של המסעדה.
           </h1>
-          {/* Outline echo behind — parallax: drifts slower than the solid headline */}
-          <div aria-hidden="true" style={{
+          {/* Outline echo behind — parallax via ref (no React re-render on scroll) */}
+          <div ref={ghostRef} aria-hidden="true" style={{
             position: 'absolute', top: 30, right: 30,
             fontFamily: 'Heebo, sans-serif',
             fontWeight: 900,
@@ -441,7 +450,6 @@ function Hero({ blue }) {
             WebkitTextStroke: '1.5px rgba(255,255,255,0.15)',
             pointerEvents: 'none',
             zIndex: 1,
-            transform: `translateY(${scrollY * 0.34}px)`,
             willChange: 'transform',
           }}>כל הספקים<br/>של המסעדה.</div>
         </div>
