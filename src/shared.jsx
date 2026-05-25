@@ -717,32 +717,51 @@ const STICKER_GLYPHS = {
   sparkle: <path d="M12 2.4 L13.9 10.1 L21.6 12 L13.9 13.9 L12 21.6 L10.1 13.9 L2.4 12 L10.1 10.1 Z" />,
 };
 
-function StickerIcon({ name, size = 46, color = '#1A2BFB', rotate = 0, style = {} }) {
+function StickerIcon({ name, size = 24, color = '#fff', rotate = 0, strokeWidth = 2.1, style = {} }) {
   const filled = name === 'sparkle';
   return (
-    <span style={{
-      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-      width: size, height: size, flexShrink: 0,
-      borderRadius: size * 0.3,
-      background: `linear-gradient(155deg, ${shadeHex(color, 58)} 0%, ${color} 52%, ${shadeHex(color, -52)} 100%)`,
-      transform: `rotate(${rotate}deg)`,
-      boxShadow: `0 0 0 ${Math.max(2, size * 0.072)}px #fff, 0 0 0 ${Math.max(2.7, size * 0.088)}px rgba(10,14,60,0.16), 0 ${size * 0.16}px ${size * 0.3}px -${size * 0.08}px rgba(8,11,70,0.55)`,
-      position: 'relative',
-      ...style,
-    }}>
-      <span aria-hidden="true" style={{
-        position: 'absolute', inset: 0, borderRadius: 'inherit',
-        background: 'linear-gradient(158deg, rgba(255,255,255,0.62) 0%, rgba(255,255,255,0.12) 34%, transparent 56%)',
+    <svg
+      width={size} height={size} viewBox="0 0 24 24"
+      fill={filled ? color : 'none'}
+      stroke={filled ? 'none' : color}
+      strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round"
+      aria-hidden="true"
+      style={{
+        display: 'block', flexShrink: 0,
+        transform: rotate ? `rotate(${rotate}deg)` : undefined,
+        ...style,
+      }}>
+      {STICKER_GLYPHS[name]}
+    </svg>
+  );
+}
+
+// ---------- LogoWatermark — faint oversized logo behind a section ----------
+// Sits absolutely in a section corner, mostly bleeding off-edge. The section
+// needs position:relative + overflow:hidden, and its content a positive z-index.
+function LogoWatermark({ corner = 'bottom-left', size = 'clamp(260px, 34vw, 520px)', dark = false }) {
+  const place = {
+    'top-right': { top: '-7%', right: '-6%' },
+    'top-left': { top: '-7%', left: '-6%' },
+    'bottom-right': { bottom: '-11%', right: '-7%' },
+    'bottom-left': { bottom: '-11%', left: '-7%' },
+  }[corner];
+  return (
+    <img
+      src="assets/pivot-logo-mark.png"
+      alt=""
+      aria-hidden="true"
+      style={{
+        position: 'absolute',
+        width: size,
+        height: size,
+        ...place,
+        opacity: dark ? 0.16 : 0.09,
         pointerEvents: 'none',
-      }} />
-      <svg
-        width={size * 0.56} height={size * 0.56} viewBox="0 0 24 24"
-        fill={filled ? '#fff' : 'none'} stroke={filled ? 'none' : '#fff'}
-        strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round"
-        style={{ position: 'relative', filter: 'drop-shadow(0 1px 1.5px rgba(0,0,0,0.32))' }}>
-        {STICKER_GLYPHS[name]}
-      </svg>
-    </span>
+        userSelect: 'none',
+        zIndex: 0,
+      }}
+    />
   );
 }
 
@@ -996,13 +1015,11 @@ function CommandPanel({ showFloats = true }) {
           borderBottom: '1px solid #E8E8E8',
         }}>
           <div style={{ position: 'relative' }}>
-            <div style={{
+            <img src="assets/pivot-logo.jpg" alt="Pivot" style={{
               width: 46, height: 46, borderRadius: 999,
-              background: '#1A2BFB',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: '#fff', fontWeight: 900, fontSize: 17,
+              objectFit: 'cover', display: 'block',
               boxShadow: '0 4px 16px rgba(26,43,251,0.4)',
-            }}>P</div>
+            }} />
             {/* Online dot */}
             <div style={{
               position: 'absolute', bottom: 0, left: 0,
@@ -1096,7 +1113,7 @@ function CommandPanel({ showFloats = true }) {
       />
       <FloatCard
         style={{ position: 'absolute', top: 290, right: -20, transform: 'rotate(-5deg)', width: 230, zIndex: 4 }}
-        sticker="lock" stickerColor="#1A2BFB" tone="dark"
+        sticker="lock" stickerColor="#fff" tone="dark"
         eyebrow="ממתין לאישור"
         title="2 הזמנות"
         rows={[
@@ -1106,7 +1123,7 @@ function CommandPanel({ showFloats = true }) {
       />
       <FloatCard
         style={{ position: 'absolute', bottom: 80, right: -50, transform: 'rotate(3deg)', width: 230, zIndex: 4 }}
-        sticker="trend" stickerColor="#0A0E5E" tone="blue"
+        sticker="trend" stickerColor="#fff" tone="blue"
         eyebrow="התייקרו השבוע"
         title="+11% עגבניות"
         rows={[
@@ -1177,7 +1194,7 @@ function FloatCard({ sticker, stickerColor = '#1A2BFB', tone = 'white', eyebrow,
         fontFamily: 'Rubik, sans-serif',
         marginBottom: 10,
       }}>
-        <StickerIcon name={sticker} size={26} color={stickerColor} rotate={-6} />
+        <StickerIcon name={sticker} size={18} color={stickerColor} />
         <span>{eyebrow}</span>
       </div>
       <div style={{
@@ -1215,6 +1232,7 @@ export {
   StickerIcon,
   StickerPill,
   StickerSparkle,
+  LogoWatermark,
   ScrollMarquee,
   LiveTicker,
   CommandPanel,

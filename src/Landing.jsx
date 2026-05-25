@@ -8,6 +8,7 @@ import {
   Sticker,
   StickerSparkle,
   StickerIcon,
+  LogoWatermark,
   ScrollMarquee,
   LiveTicker,
   CommandPanel,
@@ -65,11 +66,12 @@ function LandingWeb({ tweaks = {} }) {
 function Manifesto() {
   const isMobile = useIsMobile();
   return (
-    <section style={{
+    <section id="story" style={{
       background: '#fff', color: '#000',
       padding: 'clamp(72px, 10vw, 160px) clamp(20px, 5vw, 80px) clamp(64px, 9vw, 140px)',
       position: 'relative', overflow: 'hidden',
     }}>
+      <LogoWatermark corner="bottom-left" />
       {/* Subtle blue glow accent */}
       <div aria-hidden="true" style={{
         position: 'absolute', top: -200, right: -200,
@@ -144,20 +146,27 @@ function Manifesto() {
                   n: '01',
                   t: 'במקום שעובדים',
                   body: 'WhatsApp הוא לא ערוץ נוסף — הוא העסק. פיבוט יושבת בדיוק שם, מבלי לבקש לעבור.',
+                  shot: 'assets/hero-screenshot.jpg',
+                  tilt: 0,
                 },
                 {
                   n: '02',
                   t: 'מערכת חכמה',
                   body: 'אינטליגנציה שמבינה את הקצב של מסעדה — מתי להציע, מתי לשתוק, מתי לקרוא לבעלים.',
+                  shot: 'assets/hero-screenshot-3.jpg',
+                  tilt: 0,
                 },
                 {
                   n: '03',
                   t: 'שקט מתועד',
                   body: 'כל הזמנה, כל אישור, כל ספירה — חתומה. בלי תזכורות. בלי חיפושים. בלי טעויות.',
+                  shot: 'assets/manifesto-screenshot.jpg',
+                  tilt: 0,
                 },
               ].map((item, i) => (
                 <div key={i} style={{
                   borderTop: '1px solid #000', paddingTop: 20,
+                  display: 'flex', flexDirection: 'column',
                 }}>
                   <div style={{
                     fontFamily: 'Rubik, monospace',
@@ -166,7 +175,31 @@ function Manifesto() {
                     marginBottom: 14,
                   }}>{item.n} ·</div>
                   <div style={{ fontSize: 22, fontWeight: 800, letterSpacing: '-0.015em', marginBottom: 10 }}>{item.t}</div>
-                  <p style={{ fontSize: 15, lineHeight: 1.55, color: '#4A4A4A', margin: 0 }}>{item.body}</p>
+                  <p style={{ fontSize: 15, lineHeight: 1.55, color: '#4A4A4A', margin: '0 0 28px' }}>{item.body}</p>
+                  {/* Phone-framed screenshot */}
+                  <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'center' }}>
+                    <div style={{
+                      width: '100%', maxWidth: 230,
+                      padding: 8,
+                      background: 'linear-gradient(180deg, #1c1c1c 0%, #050505 100%)',
+                      borderRadius: 36,
+                      boxShadow:
+                        '0 0 0 1.2px #2a2a2a, 0 30px 70px -20px rgba(0,0,0,0.45),' +
+                        ' 0 14px 32px -10px rgba(0,0,0,0.3),' +
+                        ' inset 0 1px 0 rgba(255,255,255,0.08)',
+                      transform: `rotate(${item.tilt}deg)`,
+                      transformOrigin: 'center center',
+                    }}>
+                      <div style={{
+                        background: '#000', borderRadius: 29,
+                        overflow: 'hidden', position: 'relative',
+                        aspectRatio: '740 / 1600',
+                      }}>
+                        <img src={item.shot} alt=""
+                          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -193,14 +226,11 @@ function Manifesto() {
               יותר אוכל.
             </div>
           </div>
-          <div style={{
+          <img src="assets/pivot-logo.jpg" alt="Pivot Level" style={{
             width: 80, height: 80, borderRadius: '50%',
-            background: '#1A2BFB', color: '#fff',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontWeight: 900, fontSize: 32,
+            objectFit: 'cover', display: 'block',
             boxShadow: '0 12px 32px rgba(26,43,251,0.4)',
-            transform: 'rotate(-8deg)',
-          }}>P</div>
+          }} />
           <div>
             <div style={{
               fontFamily: 'Rubik, monospace', fontSize: 11,
@@ -224,9 +254,60 @@ function Manifesto() {
 // ============================================================
 // HERO — oversized takeover with cascading phones + live ticker
 // ============================================================
+// Smooth-scroll to a section by id.
+function scrollToId(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+const NAV_LINKS = [
+  { label: 'תכונות', id: 'features' },
+  { label: 'איך זה עובד', id: 'how' },
+  { label: 'מחירים', id: 'join' },
+  { label: 'לקוחות', id: 'reviews' },
+  { label: 'בלוג', id: 'story' },
+];
+
+// Hero sticker constellation — each fly in from its side, staggered after the phone.
+// `from`: which side they enter from. `tx` is the final x-offset from center.
+const HERO_STICKERS = [
+  // LEFT cluster
+  { name: 'veggies',  size: 126, from: 'left',  pos: { bottom: -20, left: '50%' },  tx: -280, rot: 14,  shadow: '0 26px 42px rgba(0,0,0,0.45)' },
+  { name: 'truck',    size: 84,  from: 'left',  pos: { top: -50,   left: '50%' },   tx: -180, rot: 12,  shadow: '0 20px 32px rgba(0,0,0,0.42)' },
+  { name: 'wine',     size: 76,  from: 'left',  pos: { top: 60,    left: '50%' },   tx: -240, rot: -12, shadow: '0 18px 28px rgba(0,0,0,0.4)' },
+  { name: 'avocado',  size: 70,  from: 'left',  pos: { top: 40,    left: '50%' },   tx: -340, rot: -22, shadow: '0 16px 26px rgba(0,0,0,0.4)' },
+  { name: 'lemon',    size: 64,  from: 'left',  pos: { top: '42%', left: '50%' },   tx: -220, rot: 20,  shadow: '0 16px 26px rgba(0,0,0,0.4)' },
+  { name: 'dumpling', size: 72,  from: 'left',  pos: { bottom: 90, left: '50%' },   tx: -380, rot: -18, shadow: '0 18px 28px rgba(0,0,0,0.4)' },
+  // RIGHT cluster
+  { name: 'steak',    size: 111, from: 'right', pos: { top: -30,   left: '50%' },   tx: 180,  rot: -15, shadow: '0 24px 38px rgba(0,0,0,0.45)' },
+  { name: 'mango',    size: 78,  from: 'right', pos: { top: 50,    left: '50%' },   tx: 320,  rot: 20,  shadow: '0 18px 28px rgba(0,0,0,0.4)' },
+  { name: 'sushi',    size: 84,  from: 'right', pos: { top: '26%', left: '50%' },   tx: 230,  rot: 18,  shadow: '0 18px 30px rgba(0,0,0,0.4)' },
+  { name: 'beer',     size: 84,  from: 'right', pos: { top: '60%', left: '50%' },   tx: 310,  rot: -14, shadow: '0 18px 30px rgba(0,0,0,0.4)' },
+  { name: 'cheese',   size: 98,  from: 'right', pos: { bottom: 30, left: '50%' },   tx: 250,  rot: -10, shadow: '0 22px 36px rgba(0,0,0,0.42)' },
+  { name: 'boxes',    size: 86,  from: 'right', pos: { bottom: 110, left: '50%' },  tx: 360,  rot: 15,  shadow: '0 20px 32px rgba(0,0,0,0.42)' },
+];
+
 function Hero({ blue }) {
   const isMobile = useIsMobile();
+  const navCompact = useIsMobile(940);
   const [scrollY, setScrollY] = useStateWeb(0);
+
+  // Replay the phone + sticker fly-in every time the hero scrolls into view.
+  const stageRef = React.useRef(null);
+  const [stageIn, setStageIn] = useStateWeb(false);
+  React.useEffect(() => {
+    const el = stageRef.current;
+    if (!el || !('IntersectionObserver' in window)) {
+      setStageIn(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => setStageIn(entry.isIntersecting),
+      { threshold: 0.18 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
   React.useEffect(() => {
     let raf = 0;
     const onScroll = () => {
@@ -272,16 +353,20 @@ function Hero({ blue }) {
         position: 'relative', zIndex: 5,
       }}>
         <Wordmark size={18} color="#fff" onDark={true} />
-        <div style={{ display: isMobile ? 'none' : 'flex', gap: 32, fontSize: 14, fontWeight: 600, color: 'rgba(255,255,255,0.85)' }}>
-          <span>תכונות</span>
-          <span>איך זה עובד</span>
-          <span>מחירים</span>
-          <span>לקוחות</span>
-          <span>בלוג</span>
+        <div style={{ display: navCompact ? 'none' : 'flex', gap: 32, fontSize: 14, fontWeight: 600, color: 'rgba(255,255,255,0.85)' }}>
+          {NAV_LINKS.map((l) => (
+            <span key={l.id} className="pivot-nav-link" onClick={() => scrollToId(l.id)}>
+              {l.label}
+            </span>
+          ))}
         </div>
         <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-          {!isMobile && <span style={{ fontSize: 14, fontWeight: 600, color: 'rgba(255,255,255,0.85)' }}>התחברות</span>}
-          <button className="pivot-btn pivot-btn-blue pivot-btn-sm" style={{ background: blue }}>נסו חינם →</button>
+          {!navCompact && <span className="pivot-nav-link">התחברות</span>}
+          <button className="pivot-btn pivot-btn-blue pivot-btn-sm" style={{ background: blue }}
+            onClick={() => scrollToId('join')}>
+            <span>נסו חינם</span>
+            <span aria-hidden="true">←</span>
+          </button>
         </div>
       </div>
 
@@ -315,7 +400,7 @@ function Hero({ blue }) {
             fontFamily: 'Rubik, sans-serif',
             boxShadow: '0 8px 24px -8px rgba(0,0,0,0.5)',
           }}>
-            <StickerIcon name="bolt" size={32} rotate={-8} />
+            <StickerIcon name="bolt" size={18} />
             WHATSAPP-FIRST · ניהול מלאי
           </span>
           <div style={{
@@ -325,7 +410,7 @@ function Hero({ blue }) {
             fontFamily: 'Rubik, sans-serif', textTransform: 'uppercase',
           }}>
             <span className="pivot-pulse-dot" style={{ width: 7, height: 7, borderRadius: 999, background: '#fff' }} />
-            240+ מסעדות · גרסת ביתא
+            240+ מסעדות
           </div>
         </div>
 
@@ -436,13 +521,13 @@ function Hero({ blue }) {
               ].map((c, i) => (
                 <span key={i} style={{
                   display: 'inline-flex', alignItems: 'center', gap: 10,
-                  padding: '6px 8px 6px 16px', borderRadius: 999,
+                  padding: '10px 18px', borderRadius: 999,
                   background: 'rgba(255,255,255,0.07)',
                   border: '1px solid rgba(255,255,255,0.16)',
                   fontSize: 14, fontWeight: 600,
                   backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)',
                 }}>
-                  <StickerIcon name={c.s} size={32} rotate={i % 2 ? -7 : 7} />
+                  <StickerIcon name={c.s} size={20} />
                   <span>{c.t}</span>
                 </span>
               ))}
@@ -459,25 +544,140 @@ function Hero({ blue }) {
         </div>
 
         {/* COMMAND PANEL — replaces phone cascade */}
-        <div style={{
+        <div ref={stageRef} className={`hero-stage${stageIn ? ' is-in' : ''}`} style={{
           position: 'relative',
           marginTop: 20,
           marginBottom: -100,
           display: 'flex',
           justifyContent: 'center',
         }}>
-          <CommandPanel showFloats={!isMobile} />
-          {/* Curated sticker placement — desktop only */}
+          {/* BACK-LEFT iPhone — third screenshot, tilted left, peeks behind on the left */}
           {!isMobile && (
-            <>
-              <Sticker name="veggies" size={200} rotate={14}
-                style={{ position: 'absolute', bottom: -20, left: 20, zIndex: 5,
-                  filter: 'drop-shadow(0 30px 50px rgba(0,0,0,0.4))' }} />
-              <Sticker name="steak" size={180} rotate={-12}
-                style={{ position: 'absolute', top: -40, left: 220, zIndex: 5,
-                  filter: 'drop-shadow(0 30px 50px rgba(0,0,0,0.4))' }} />
-            </>
+            <div style={{
+              position: 'absolute', top: 0, left: '50%',
+              width: 'min(360px, 86vw)',
+              transform: 'translateX(calc(-50% - 170px)) translateY(56px)',
+              zIndex: 2,
+              pointerEvents: 'none',
+            }}>
+              <div className="hero-phone-stage">
+                <div style={{
+                  width: '100%',
+                  padding: 11,
+                  background: 'linear-gradient(180deg, #1c1c1c 0%, #050505 100%)',
+                  borderRadius: 52,
+                  boxShadow:
+                    '0 0 0 1.5px #2a2a2a, 0 60px 140px -30px rgba(0,0,0,0.55),' +
+                    ' 0 30px 70px -20px rgba(0,0,0,0.35),' +
+                    ' inset 0 1px 0 rgba(255,255,255,0.08)',
+                  transform: 'rotate(-11deg)',
+                  transformOrigin: 'center center',
+                }}>
+                  <div style={{
+                    background: '#000', borderRadius: 42,
+                    overflow: 'hidden', position: 'relative',
+                    aspectRatio: '740 / 1600',
+                  }}>
+                    <img
+                      src="assets/hero-screenshot-3.jpg"
+                      alt="Pivot — נתוני המסעדה"
+                      style={{
+                        width: '100%', height: '100%',
+                        objectFit: 'cover', display: 'block',
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           )}
+          {/* BACK-RIGHT iPhone — second screenshot, tilted right, peeks behind on the right */}
+          {!isMobile && (
+            <div style={{
+              position: 'absolute', top: 0, left: '50%',
+              width: 'min(360px, 86vw)',
+              transform: 'translateX(calc(-50% + 170px)) translateY(56px)',
+              zIndex: 2,
+              pointerEvents: 'none',
+            }}>
+              <div className="hero-phone-stage">
+                <div style={{
+                  width: '100%',
+                  padding: 11,
+                  background: 'linear-gradient(180deg, #1c1c1c 0%, #050505 100%)',
+                  borderRadius: 52,
+                  boxShadow:
+                    '0 0 0 1.5px #2a2a2a, 0 60px 140px -30px rgba(0,0,0,0.55),' +
+                    ' 0 30px 70px -20px rgba(0,0,0,0.35),' +
+                    ' inset 0 1px 0 rgba(255,255,255,0.08)',
+                  transform: 'rotate(8deg)',
+                  transformOrigin: 'center center',
+                }}>
+                  <div style={{
+                    background: '#000', borderRadius: 42,
+                    overflow: 'hidden', position: 'relative',
+                    aspectRatio: '740 / 1600',
+                  }}>
+                    <img
+                      src="assets/hero-screenshot-2.jpg"
+                      alt="Pivot — מחירון בווטסאפ"
+                      style={{
+                        width: '100%', height: '100%',
+                        objectFit: 'cover', display: 'block',
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          {/* FRONT iPhone — primary screenshot, rises in on scroll-in */}
+          <div className="hero-phone-stage" style={{ position: 'relative', zIndex: 3 }}>
+          <div style={{
+            width: 'min(360px, 86vw)',
+            padding: 11,
+            background: 'linear-gradient(180deg, #1c1c1c 0%, #050505 100%)',
+            borderRadius: 52,
+            boxShadow:
+              '0 0 0 1.5px #2a2a2a, 0 60px 140px -30px rgba(0,0,0,0.7),' +
+              ' 0 30px 70px -20px rgba(0,0,0,0.45),' +
+              ' inset 0 1px 0 rgba(255,255,255,0.08)',
+            transform: 'rotate(-5deg)',
+            transformOrigin: 'center center',
+          }}>
+            <div style={{
+              background: '#000',
+              borderRadius: 42,
+              overflow: 'hidden',
+              position: 'relative',
+              aspectRatio: '740 / 1600',
+            }}>
+              <img
+                src="assets/hero-screenshot.jpg"
+                alt="Pivot — שיחת ווטסאפ עם המערכת"
+                style={{
+                  width: '100%', height: '100%',
+                  objectFit: 'cover', display: 'block',
+                }}
+              />
+            </div>
+          </div>
+          </div>
+          {/* Sticker constellation — pops in from the sides (desktop only) */}
+          {!isMobile && HERO_STICKERS.map((s, i) => (
+            <div key={s.name}
+              className={s.from === 'left' ? 'hero-fly-from-left' : 'hero-fly-from-right'}
+              style={{
+                position: 'absolute', ...s.pos, zIndex: 5,
+                animationDelay: `${0.65 + i * 0.06}s`,
+              }}>
+              <Sticker name={s.name} size={s.size} style={{
+                display: 'block',
+                transform: `translateX(${s.tx}px) rotate(${s.rot}deg)`,
+                filter: `drop-shadow(${s.shadow})`,
+              }} />
+            </div>
+          ))}
         </div>
       </div>
 
@@ -732,7 +932,7 @@ function HowItWorks() {
     },
   ];
   return (
-    <section style={{ background: '#fff', padding: 'clamp(64px, 9vw, 120px) clamp(20px, 5vw, 80px)', position: 'relative', overflow: 'hidden' }}>
+    <section id="how" style={{ background: '#fff', padding: 'clamp(64px, 9vw, 120px) clamp(20px, 5vw, 80px)', position: 'relative', overflow: 'hidden' }}>
       <Sticker name="truck" size={156} rotate={-10}
         style={{ position: 'absolute', top: 64, left: -30, zIndex: 0 }} />
       <Sticker name="boxes" size={124} rotate={12}
@@ -795,8 +995,9 @@ function HowItWorks() {
 function BentoFeatures() {
   const isMobile = useIsMobile();
   return (
-    <section style={{ background: '#F5F5F5', padding: 'clamp(64px, 9vw, 120px) clamp(20px, 5vw, 80px)' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+    <section id="features" style={{ background: '#F5F5F5', padding: 'clamp(64px, 9vw, 120px) clamp(20px, 5vw, 80px)', position: 'relative', overflow: 'hidden' }}>
+      <LogoWatermark corner="top-right" />
+      <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 24, marginBottom: 32 }}>
           <div className="pivot-eyebrow" style={{ color: '#1A2BFB' }}>היכולות של פיבוט</div>
           <div style={{ flex: 1, height: 1, background: '#E8E8E8' }} />
@@ -819,7 +1020,7 @@ function BentoFeatures() {
         }}>
           {/* INVENTORY — wide top-left */}
           <BentoCell colSpan={4} rowSpan={2} bg="#1A2BFB" color="#fff">
-            <BentoLabel num="01" sticker="box" stickerColor="#0A0E5E" label="ניהול מלאי חי" color="rgba(255,255,255,0.85)" />
+            <BentoLabel num="01" sticker="box" stickerColor="#fff" label="ניהול מלאי חי" color="rgba(255,255,255,0.85)" />
             <h3 style={{ fontSize: 56, fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 0.95, margin: '20px 0 16px' }}>
               ספירות, Par Level,<br/>חוסרים בזמן אמת.
             </h3>
@@ -836,7 +1037,7 @@ function BentoFeatures() {
 
           {/* TALK TO INVENTORY — narrow tall top-right */}
           <BentoCell colSpan={2} rowSpan={2} bg="#fff" color="#000">
-            <BentoLabel num="02" sticker="chat" label="לדבר עם המלאי" color="#1A2BFB" />
+            <BentoLabel num="02" sticker="chat" stickerColor="#1A2BFB" label="לדבר עם המלאי" color="#1A2BFB" />
             <h3 style={{ fontSize: 36, fontWeight: 900, letterSpacing: '-0.02em', lineHeight: 1, margin: '20px 0 14px' }}>
               שואלים. <span style={{ color: '#1A2BFB' }}>מקבלים תשובה.</span>
             </h3>
@@ -875,7 +1076,7 @@ function BentoFeatures() {
 
           {/* INVOICE OCR — black square */}
           <BentoCell colSpan={2} rowSpan={2} bg="#000" color="#fff">
-            <BentoLabel num="03" sticker="receipt" label="חשבוניות OCR" color="rgba(255,255,255,0.7)" />
+            <BentoLabel num="03" sticker="receipt" stickerColor="#fff" label="חשבוניות OCR" color="rgba(255,255,255,0.7)" />
             <h3 style={{ fontSize: 30, fontWeight: 900, letterSpacing: '-0.02em', lineHeight: 1, margin: '16px 0 12px' }}>
               צילום → השוואה<br/>למחירי עבר.
             </h3>
@@ -900,7 +1101,7 @@ function BentoFeatures() {
 
           {/* PERMISSIONS — small */}
           <BentoCell colSpan={2} rowSpan={1} bg="#fff" color="#000">
-            <BentoLabel num="04" sticker="lock" label="הרשאות" color="#1A2BFB" />
+            <BentoLabel num="04" sticker="lock" stickerColor="#1A2BFB" label="הרשאות" color="#1A2BFB" />
             <h3 style={{ fontSize: 24, fontWeight: 900, letterSpacing: '-0.02em', lineHeight: 1, margin: '12px 0 8px' }}>
               לפי תפקיד.
             </h3>
@@ -923,7 +1124,7 @@ function BentoFeatures() {
           <BentoCell colSpan={4} rowSpan={1} bg="#1A2BFB" color="#fff">
             <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1.6fr', gap: 24, height: '100%', alignItems: 'center' }}>
               <div>
-                <BentoLabel num="05" sticker="clock" stickerColor="#0A0E5E" label="תזמוני הזמנות" color="rgba(255,255,255,0.85)" />
+                <BentoLabel num="05" sticker="clock" stickerColor="#fff" label="תזמוני הזמנות" color="rgba(255,255,255,0.85)" />
                 <h3 style={{ fontSize: 28, fontWeight: 900, letterSpacing: '-0.02em', lineHeight: 1, margin: '12px 0 8px' }}>
                   תזכורות בזמן הנכון.<br/>בלי לסמוך על זיכרון.
                 </h3>
@@ -952,7 +1153,7 @@ function BentoFeatures() {
 
           {/* OWNER PEACE — small */}
           <BentoCell colSpan={2} rowSpan={1} bg="#000" color="#fff">
-            <BentoLabel num="06" sticker="check" label="שקט לבעלים" color="rgba(255,255,255,0.7)" />
+            <BentoLabel num="06" sticker="check" stickerColor="#fff" label="שקט לבעלים" color="rgba(255,255,255,0.7)" />
             <h3 style={{ fontSize: 24, fontWeight: 900, letterSpacing: '-0.02em', lineHeight: 1, margin: '12px 0 8px' }}>
               כל הזמנה<br/>מתועדת. אוטומטית.
             </h3>
@@ -1000,7 +1201,7 @@ function BentoLabel({ num, label, sticker, stickerColor = '#1A2BFB', color }) {
       letterSpacing: '0.12em', textTransform: 'uppercase',
       color,
     }}>
-      {sticker && <StickerIcon name={sticker} size={30} color={stickerColor} rotate={-6} />}
+      {sticker && <StickerIcon name={sticker} size={20} color={stickerColor} />}
       <span>{num}</span>
       <span style={{ opacity: 0.5 }}>—</span>
       <span>{label}</span>
@@ -1147,12 +1348,11 @@ function TalkToInventory() {
               background: 'linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 100%)',
             }}>
               <div style={{ position: 'relative' }}>
-                <div style={{
-                  width: 40, height: 40, borderRadius: 999, background: '#1A2BFB',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: '#fff', fontWeight: 900, fontSize: 15,
+                <img src="assets/pivot-logo.jpg" alt="Pivot" style={{
+                  width: 40, height: 40, borderRadius: 999,
+                  objectFit: 'cover', display: 'block',
                   boxShadow: '0 4px 12px rgba(26,43,251,0.4)',
-                }}>P</div>
+                }} />
                 <div style={{
                   position: 'absolute', bottom: 0, left: 0,
                   width: 12, height: 12, borderRadius: 999,
@@ -1296,8 +1496,9 @@ function Advantages() {
     { n: '00:00', unit: 'דקות', title: 'בלי לימוד', body: 'המסעדה כבר בוואטסאפ. פיבוט יושב בדיוק שם.' },
   ];
   return (
-    <section style={{ background: '#000', color: '#fff', padding: 'clamp(64px, 9vw, 120px) clamp(20px, 5vw, 80px)' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+    <section style={{ background: '#000', color: '#fff', padding: 'clamp(64px, 9vw, 120px) clamp(20px, 5vw, 80px)', position: 'relative', overflow: 'hidden' }}>
+      <LogoWatermark corner="bottom-right" dark />
+      <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 24, marginBottom: 56 }}>
           <div className="pivot-eyebrow" style={{ color: '#1A2BFB' }}>למה פיבוט</div>
           <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.2)' }} />
@@ -1352,7 +1553,7 @@ function WhatsAppReviews() {
     { author: 'איציק טל', role: 'שף-בעלים · OISO', avatar: 'I', side: 'left', text: 'עברנו 4 מערכות בעבר. פיבוט הוא הראשונה שצוות המטבח באמת השתמש בה.', time: 'לפני 5 ימים', stars: 5 },
   ];
   return (
-    <section style={{ background: '#fff', padding: 'clamp(64px, 9vw, 120px) clamp(20px, 5vw, 80px)', position: 'relative', overflow: 'hidden' }}>
+    <section id="reviews" style={{ background: '#fff', padding: 'clamp(64px, 9vw, 120px) clamp(20px, 5vw, 80px)', position: 'relative', overflow: 'hidden' }}>
       <Sticker name="pasta" size={142} rotate={-12}
         style={{ position: 'absolute', top: 116, left: -32, zIndex: 0 }} />
       <Sticker name="beer" size={120} rotate={13}
@@ -1386,11 +1587,10 @@ function WhatsAppReviews() {
             paddingBottom: 28, borderBottom: '1px solid #E8E8E8',
             marginBottom: 32,
           }}>
-            <div style={{
-              width: 48, height: 48, borderRadius: 999, background: '#1A2BFB',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: '#fff', fontWeight: 900, fontSize: 18,
-            }}>P</div>
+            <img src="assets/pivot-logo.jpg" alt="Pivot" style={{
+              width: 48, height: 48, borderRadius: 999,
+              objectFit: 'cover', display: 'block',
+            }} />
             <div style={{ flex: 1 }}>
               <div style={{ fontWeight: 800, fontSize: 18 }}>קבוצת לקוחות Pivot</div>
               <div style={{ fontSize: 13, color: '#8C8C8C', display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -1476,7 +1676,7 @@ function Waitlist({ blue }) {
   const isMobile = useIsMobile();
   const [email, setEmail] = useStateWeb('');
   return (
-    <section style={{ background: blue, color: '#fff', padding: 'clamp(64px, 9vw, 140px) clamp(20px, 5vw, 80px) clamp(56px, 8vw, 120px)', position: 'relative', overflow: 'hidden' }}>
+    <section id="join" style={{ background: blue, color: '#fff', padding: 'clamp(64px, 9vw, 140px) clamp(20px, 5vw, 80px) clamp(56px, 8vw, 120px)', position: 'relative', overflow: 'hidden' }}>
       {/* Background scrolling type */}
       <div style={{
         position: 'absolute', top: 0, left: 0, right: 0,
@@ -1600,13 +1800,12 @@ function Footer() {
           <div>
             <Wordmark size={22} color="#fff" onDark={true} />
             <p style={{ marginTop: 24, fontSize: 14, lineHeight: 1.6, color: 'rgba(255,255,255,0.6)', maxWidth: 280 }}>
-              ניהול ספקים למסעדות. ישירות מהוואטסאפ. נבנה בתל אביב עם אהבה לכל מי שעובד בענף.
+              ניהול ספקים למסעדות. ישירות מהוואטסאפ.
             </p>
             <div style={{ display: 'flex', gap: 10, marginTop: 24 }}>
               {['X', 'IG', 'in', 'YT'].map((s, i) => (
-                <div key={i} style={{
+                <div key={i} className="pivot-footer-social" style={{
                   width: 36, height: 36, borderRadius: 999,
-                  background: 'rgba(255,255,255,0.08)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   fontSize: 12, fontWeight: 700, fontFamily: 'Rubik, sans-serif',
                 }}>{s}</div>
@@ -1618,7 +1817,7 @@ function Footer() {
               <div className="pivot-eyebrow" style={{ color: 'rgba(255,255,255,0.5)', marginBottom: 18 }}>{c.title}</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {c.items.map((it, j) => (
-                  <span key={j} style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)' }}>{it}</span>
+                  <span key={j} className="pivot-footer-link">{it}</span>
                 ))}
               </div>
             </div>
@@ -1629,11 +1828,10 @@ function Footer() {
           display: 'flex', justifyContent: 'space-between', alignItems: 'center',
           fontSize: 13, color: 'rgba(255,255,255,0.5)',
         }}>
-          <div>© 2026 Pivot Level Ltd. כל הזכויות שמורות.</div>
-          <div style={{ display: 'flex', gap: 24 }}>
-            <span>🇮🇱 עברית</span>
-            <span>🇺🇸 English</span>
-            <span>🇸🇦 العربية</span>
+          <div>
+            © 2026 Pivot Level Ltd. כל הזכויות שמורות. · נבנה ועוצב באהבה על ידי{' '}
+            <a href="https://errn.io" target="_blank" rel="noopener noreferrer"
+              style={{ color: 'rgba(255,255,255,0.85)', fontWeight: 700 }}>errn.io</a>
           </div>
         </div>
       </div>
