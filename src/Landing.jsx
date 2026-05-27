@@ -439,7 +439,7 @@ function Hero({ blue }) {
             zIndex: 2,
           }}>
             כל הספקים<br/>
-            של המסעדה.
+            של המסעדה
           </h1>
           {/* Outline echo behind — parallax via ref (no React re-render on scroll) */}
           <div ref={ghostRef} aria-hidden="true" style={{
@@ -454,7 +454,7 @@ function Hero({ blue }) {
             pointerEvents: 'none',
             zIndex: 1,
             willChange: 'transform',
-          }}>כל הספקים<br/>של המסעדה.</div>
+          }}>כל הספקים<br/>של המסעדה</div>
         </div>
 
         {/* "בוואטסאפ." pill — separate row, big */}
