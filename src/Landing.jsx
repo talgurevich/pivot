@@ -1485,10 +1485,13 @@ function InsuranceTagline() {
           מערכת שמחזירה לבעלים <b style={{ color: '#fff', fontWeight: 700 }}>סדר, שליטה ושקט</b> — דרך WhatsApp, בלי להכניס עוד אפליקציה לעסק.
         </p>
         <div style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap' }}>
-          <button className="pivot-btn pivot-btn-blue" style={{ height: 64, fontSize: 17 }}>
+          <a className="pivot-btn pivot-btn-blue"
+            href="https://wa.me/97283761057"
+            target="_blank" rel="noopener noreferrer"
+            style={{ height: 64, fontSize: 17 }}>
             <span style={{ width: 10, height: 10, borderRadius: 999, background: '#25D366', boxShadow: '0 0 0 3px rgba(37,211,102,0.32)' }} />
             דברו איתנו בווטסאפ
-          </button>
+          </a>
         </div>
       </div>
     </section>
