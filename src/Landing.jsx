@@ -260,6 +260,15 @@ function scrollToId(id) {
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
+// Footer items that point to real pages/anchors. Items not in this map render as plain text.
+const FOOTER_HREFS = {
+  'תנאי שימוש': './terms.html',
+  'מדיניות פרטיות': './privacy.html',
+  'אבטחה': './privacy.html#security',
+  'GDPR': './privacy.html#rights',
+  'עוגיות': './privacy.html#cookies',
+};
+
 const NAV_LINKS = [
   { label: 'תכונות', id: 'features' },
   { label: 'איך זה עובד', id: 'how' },
@@ -373,7 +382,10 @@ function Hero({ blue }) {
           ))}
         </div>
         <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-          {!navCompact && <span className="pivot-nav-link">התחברות</span>}
+          {!navCompact && (
+            <a className="pivot-nav-link" href="https://pivott.digital/login"
+              target="_blank" rel="noopener noreferrer">התחברות</a>
+          )}
           <button className="pivot-btn pivot-btn-blue pivot-btn-sm" style={{ background: blue }}
             onClick={() => scrollToId('join')}>
             <span>נסו חינם</span>
@@ -980,10 +992,6 @@ function HowItWorks() {
               position: 'relative', zIndex: 1, background: '#fff',
             }}>
               <div style={{
-                fontSize: 13, fontWeight: 800, fontFamily: 'Rubik, sans-serif',
-                color: '#1A2BFB', letterSpacing: '0.06em',
-              }}>{s.n} / 05</div>
-              <div style={{
                 fontSize: 80, fontWeight: 900, letterSpacing: '-0.04em',
                 lineHeight: 0.9, color: '#000',
                 fontFamily: 'Heebo, sans-serif',
@@ -1147,9 +1155,9 @@ function BentoFeatures() {
               </div>
               <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: 12, overflow: 'hidden' }}>
                 {[
-                  { sup: 'אחים כהן', cut: '11:00', deliv: 'מחר 06:00', urgent: true },
-                  { sup: 'טמפו', cut: '14:00', deliv: 'מחר 09:00' },
-                  { sup: 'קוקה קולה', cut: 'אושר ✓', deliv: 'יום ה׳' },
+                  { sup: 'ספק בשר', cut: '11:00', deliv: 'מחר 06:00', urgent: true },
+                  { sup: 'ספק משקאות', cut: '14:00', deliv: 'מחר 09:00' },
+                  { sup: 'ספק חלב', cut: 'אושר ✓', deliv: 'יום ה׳' },
                 ].map((s, i) => (
                   <div key={i} style={{
                     flex: 1,
@@ -1243,7 +1251,7 @@ const TALK_PRESETS = [
   },
   {
     q: 'איזה ספק צריך הזמנה היום?',
-    a: '🚚 אחים כהן — עד 11:00\n🚚 טמפו — עד 14:00\n✅ קוקה קולה כבר אושר',
+    a: '🚚 ספק בשר — עד 11:00\n🚚 ספק משקאות — עד 14:00\n✅ ספק חלב כבר אושר',
   },
   {
     q: 'מי הזמין אתמול?',
@@ -1255,7 +1263,7 @@ function TalkToInventory() {
   const isMobile = useIsMobile();
   const [thread, setThread] = useStateWeb([
     { from: 'me', text: 'איזה ספק צריך הזמנה היום?' },
-    { from: 'bot', text: '🚚 אחים כהן — עד 11:00\n🚚 טמפו — עד 14:00\n✅ קוקה קולה כבר אושר' },
+    { from: 'bot', text: '🚚 ספק בשר — עד 11:00\n🚚 ספק משקאות — עד 14:00\n✅ ספק חלב כבר אושר' },
   ]);
   const [typing, setTyping] = useStateWeb(false);
 
@@ -1343,18 +1351,26 @@ function TalkToInventory() {
             ))}
           </div>
 
-          {/* Chat output — premium dark surface */}
+          {/* Chat output — wrapped in an iPhone-style frame */}
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
           <div style={{
-            background: '#000', borderRadius: 28,
-            padding: 0,
-            boxShadow: `
-              0 0 0 1px rgba(255,255,255,0.05),
-              0 40px 100px -30px rgba(0,0,0,0.5),
-              0 20px 50px -15px rgba(0,0,0,0.3)
-            `,
-            minHeight: 540, position: 'relative',
-            display: 'flex', flexDirection: 'column',
+            width: 'min(360px, 100%)',
+            padding: 11,
+            background: 'linear-gradient(180deg, #1c1c1c 0%, #050505 100%)',
+            borderRadius: 52,
+            boxShadow:
+              '0 0 0 1.5px #2a2a2a, 0 60px 140px -30px rgba(0,0,0,0.6),' +
+              ' 0 30px 70px -20px rgba(0,0,0,0.4),' +
+              ' inset 0 1px 0 rgba(255,255,255,0.08)',
+            position: 'relative',
+          }}>
+          <div style={{
+            background: '#000',
+            borderRadius: 42,
             overflow: 'hidden',
+            position: 'relative',
+            aspectRatio: '740 / 1600',
+            display: 'flex', flexDirection: 'column',
           }}>
             {/* Header */}
             <div style={{
@@ -1442,6 +1458,8 @@ function TalkToInventory() {
               ← לחצו על שאלה כדי להמשיך את הדמו
             </div>
           </div>
+          </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1512,6 +1530,7 @@ function Advantages() {
     { n: '02:30', unit: 'שעות / יום', title: 'חוסך זמן', body: 'במקום לרדוף אחרי 30 ספקים בוואטסאפ.' },
     { n: '90%', unit: 'פחות', title: 'מפחית טעויות', body: 'אישור כפול, מחירונים, ובדיקת כמויות אוטומטית.' },
     { n: '00:00', unit: 'דקות', title: 'בלי לימוד', body: 'המסעדה כבר בוואטסאפ. פיבוט יושב בדיוק שם.' },
+    { n: '22', unit: 'שעות / חודש', title: 'שימוש ממוצע', body: 'זה כל מה שמסעדה ממוצעת מבלה במערכת — כי הכל מתנהל ישירות בוואטסאפ, בלי מעברים בין אפליקציות.' },
   ];
   return (
     <section style={{ background: '#000', color: '#fff', padding: 'clamp(64px, 9vw, 120px) clamp(20px, 5vw, 80px)', position: 'relative', overflow: 'hidden' }}>
@@ -1724,7 +1743,7 @@ function Waitlist({ blue }) {
           marginBottom: 48,
           maxWidth: 1000,
         }}>
-          14 ימי התנסות על 5 ספקים.<br/>
+          30 ימי התנסות על 5 ספקים.<br/>
           <span style={{
             background: '#000', padding: '8px 24px', display: 'inline-block',
             borderRadius: 16, marginTop: 20,
@@ -1741,7 +1760,7 @@ function Waitlist({ blue }) {
               השאירו אימייל ותקבלו גישה מיידית. צוות פיבוט יתקין לכם את כל הספקים תוך 24 שעות.
             </p>
             <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
-              <BulletItem t="התקנה ב-24 שעות" />
+              <BulletItem t="הקמה ב-48 שעות" />
               <BulletItem t="ללא כרטיס אשראי" />
               <BulletItem t="ביטול בלחיצה" />
               <BulletItem t="תמיכה בעברית 24/6" />
@@ -1833,9 +1852,12 @@ function Footer() {
             <div key={i}>
               <div className="pivot-eyebrow" style={{ color: 'rgba(255,255,255,0.5)', marginBottom: 18 }}>{c.title}</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {c.items.map((it, j) => (
-                  <span key={j} className="pivot-footer-link">{it}</span>
-                ))}
+                {c.items.map((it, j) => {
+                  const href = FOOTER_HREFS[it];
+                  return href
+                    ? <a key={j} className="pivot-footer-link" href={href}>{it}</a>
+                    : <span key={j} className="pivot-footer-link">{it}</span>;
+                })}
               </div>
             </div>
           ))}

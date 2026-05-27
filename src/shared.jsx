@@ -192,12 +192,12 @@ function ChatMockup({ scale = 1 }) {
 // ---------- Dashboard screenshot (orders board) ----------
 function DashboardOrders({ width = 760, height = 480 }) {
   const rows = [
-    { id: '#4821', supplier: 'ירקות השדה', status: 'נשלח', statusColor: '#1A2BFB', amount: '322.80', items: 2, eta: 'מחר 06:00' },
-    { id: '#4820', supplier: 'בשרים אחים לוי', status: 'אושר', statusColor: '#000', amount: '1,840.00', items: 7, eta: 'היום 14:00' },
-    { id: '#4819', supplier: 'מאפיית ברקת', status: 'התקבל', statusColor: '#8C8C8C', amount: '264.50', items: 4, eta: '—' },
-    { id: '#4818', supplier: 'דגי הים התיכון', status: 'נשלח', statusColor: '#1A2BFB', amount: '780.00', items: 3, eta: 'מחר 05:30' },
-    { id: '#4817', supplier: 'יינות גליל', status: 'אושר', statusColor: '#000', amount: '2,150.00', items: 12, eta: 'יום ה׳ 10:00' },
-    { id: '#4816', supplier: 'גבינות בוטיק', status: 'התקבל', statusColor: '#8C8C8C', amount: '512.30', items: 5, eta: '—' },
+    { id: '#4821', supplier: 'ספק ירקות', status: 'נשלח', statusColor: '#1A2BFB', amount: '322.80', items: 2, eta: 'מחר 06:00' },
+    { id: '#4820', supplier: 'ספק בשר', status: 'אושר', statusColor: '#000', amount: '1,840.00', items: 7, eta: 'היום 14:00' },
+    { id: '#4819', supplier: 'ספק מאפים', status: 'התקבל', statusColor: '#8C8C8C', amount: '264.50', items: 4, eta: '—' },
+    { id: '#4818', supplier: 'ספק דגים', status: 'נשלח', statusColor: '#1A2BFB', amount: '780.00', items: 3, eta: 'מחר 05:30' },
+    { id: '#4817', supplier: 'ספק יין', status: 'אושר', statusColor: '#000', amount: '2,150.00', items: 12, eta: 'יום ה׳ 10:00' },
+    { id: '#4816', supplier: 'ספק חלב', status: 'התקבל', statusColor: '#8C8C8C', amount: '512.30', items: 5, eta: '—' },
   ];
   return (
     <div style={{
@@ -791,13 +791,13 @@ function ScrollMarquee({ children, speed = 'normal', reverse = false, gap = 56, 
 function LiveTicker() {
   const lines = [
     'מסעדת Sapore הזמינה 14 ק"ג עגבניות שרי',
-    'נומאד אישרה משלוח מבשרים אחים לוי',
-    'בייקרי 12 שלחה הזמנה חדשה למאפיית ברקת',
+    'נומאד אישרה משלוח מספק בשר',
+    'בייקרי 12 שלחה הזמנה חדשה לספק מאפים',
     'KILO ביטלה הזמנה — קיבלה חזרה ₪322',
-    'מרים בר עברה למחירון חדש של יינות גליל',
-    'OISO ביצעה הזמנה חוזרת — דגי הים התיכון',
-    'דג מלוח הוסיפה ספק חדש: גבינות בוטיק',
-    'Forma אישרה משלוח של מאפיית ברקת',
+    'מרים בר עברה למחירון חדש של ספק יין',
+    'OISO ביצעה הזמנה חוזרת — ספק דגים',
+    'דג מלוח הוסיפה ספק חדש: ספק חלב',
+    'Forma אישרה משלוח של ספק מאפים',
   ];
   return (
     <ScrollMarquee speed="slow" gap={40}>
