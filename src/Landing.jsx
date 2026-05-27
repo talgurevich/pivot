@@ -674,21 +674,26 @@ function Hero({ blue }) {
             </div>
           </div>
           </div>
-          {/* Sticker constellation — pops in from the sides (desktop only) */}
-          {!isMobile && HERO_STICKERS.map((s, i) => (
-            <div key={s.name}
-              className={s.from === 'left' ? 'hero-fly-from-left' : 'hero-fly-from-right'}
-              style={{
-                position: 'absolute', ...s.pos, zIndex: 5,
-                animationDelay: `${0.65 + i * 0.06}s`,
-              }}>
-              <Sticker name={s.name} size={s.size} style={{
-                display: 'block',
-                transform: `translateX(${s.tx}px) rotate(${s.rot}deg)`,
-                filter: `drop-shadow(${s.shadow})`,
-              }} />
-            </div>
-          ))}
+          {/* Sticker constellation — pops in from the sides. On mobile,
+              sizes and x-offsets are scaled down so they still fit and peek
+              in around the single (smaller) phone. */}
+          {HERO_STICKERS.map((s, i) => {
+            const m = isMobile ? 0.5 : 1;
+            return (
+              <div key={s.name}
+                className={s.from === 'left' ? 'hero-fly-from-left' : 'hero-fly-from-right'}
+                style={{
+                  position: 'absolute', ...s.pos, zIndex: 5,
+                  animationDelay: `${0.65 + i * 0.06}s`,
+                }}>
+                <Sticker name={s.name} size={Math.round(s.size * m)} style={{
+                  display: 'block',
+                  transform: `translateX(${Math.round(s.tx * m)}px) rotate(${s.rot}deg)`,
+                  filter: `drop-shadow(${s.shadow})`,
+                }} />
+              </div>
+            );
+          })}
         </div>
       </div>
 
