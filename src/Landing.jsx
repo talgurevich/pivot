@@ -265,7 +265,6 @@ const NAV_LINKS = [
   { label: 'איך זה עובד', id: 'how' },
   { label: 'מחירים', id: 'join' },
   { label: 'לקוחות', id: 'reviews' },
-  { label: 'בלוג', id: 'story' },
 ];
 
 // Hero sticker constellation — each fly in from its side, staggered after the phone.
@@ -285,6 +284,10 @@ const HERO_STICKERS = [
   { name: 'beer',     size: 84,  from: 'right', pos: { top: '60%', left: '50%' },   tx: 310,  rot: -14, shadow: '0 18px 30px rgba(0,0,0,0.4)' },
   { name: 'cheese',   size: 98,  from: 'right', pos: { bottom: 30, left: '50%' },   tx: 250,  rot: -10, shadow: '0 22px 36px rgba(0,0,0,0.42)' },
   { name: 'boxes',    size: 86,  from: 'right', pos: { bottom: 110, left: '50%' },  tx: 360,  rot: 15,  shadow: '0 20px 32px rgba(0,0,0,0.42)' },
+  // New bottles
+  { name: 'campari',  size: 48,  from: 'left',  pos: { top: '54%', left: '50%' },   tx: -300, rot: -10, shadow: '0 14px 22px rgba(0,0,0,0.4)' },
+  { name: 'brandy',   size: 46,  from: 'right', pos: { top: '46%', left: '50%' },   tx: 270,  rot: 10,  shadow: '0 14px 22px rgba(0,0,0,0.4)' },
+  { name: 'cola',     size: 39,  from: 'right', pos: { bottom: 200, left: '50%' },  tx: 145,  rot: -6,  shadow: '0 12px 20px rgba(0,0,0,0.4)' },
 ];
 
 function Hero({ blue }) {
@@ -520,7 +523,7 @@ function Hero({ blue }) {
             {/* Chips row — branded sticker icons */}
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 32 }}>
               {[
-                { s: 'box', t: 'מצבת מלאי' },
+                { s: 'box', t: 'מצבת ברזל' },
                 { s: 'receipt', t: 'חשבוניות' },
                 { s: 'lock', t: 'הרשאות' },
                 { s: 'clock', t: 'תזמונים' },
@@ -542,8 +545,8 @@ function Hero({ blue }) {
             </div>
 
             <div style={{ display: 'flex', gap: 12, marginBottom: 24, flexWrap: 'wrap' }}>
-              <button className="pivot-btn pivot-btn-white">לראות איך זה עובד ▷</button>
-              <button className="pivot-btn pivot-btn-ghost-white">בדיקת התאמה למסעדה</button>
+              <a className="pivot-btn pivot-btn-white" href="https://pivott.digital/login"
+                target="_blank" rel="noopener noreferrer">לראות איך זה עובד ▷</a>
             </div>
             <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)' }}>
               ✓ ללא כרטיס אשראי &nbsp;·&nbsp; ✓ ביטול בכל רגע &nbsp;·&nbsp; ✓ עברית מלאה
@@ -1486,7 +1489,6 @@ function InsuranceTagline() {
             <span style={{ width: 10, height: 10, borderRadius: 999, background: '#25D366', boxShadow: '0 0 0 3px rgba(37,211,102,0.32)' }} />
             דברו איתנו בווטסאפ
           </button>
-          <button className="pivot-btn pivot-btn-ghost-white" style={{ height: 64, fontSize: 17 }}>בדיקת התאמה</button>
         </div>
       </div>
     </section>
@@ -1557,7 +1559,6 @@ function WhatsAppReviews() {
     { author: 'יוסי לוי', role: 'מנהל רכש · בייקרי 12', avatar: 'Y', side: 'left', text: 'הספקים מתאהבים בזה לפני שאנחנו. ההזמנות מגיעות מסודרות — בלי הודעות קוליות בני 8 דקות.', time: 'לפני שבוע', stars: 5 },
     { author: 'דנה קרן', role: 'CFO · נומאד', avatar: 'D', side: 'right', text: 'בחודש הראשון תפסנו טעות חיוב של ₪14,000. פיבוט החזיר את עצמו פי 50 בשבוע. נקודה.', time: 'לפני שבועיים', stars: 5 },
     { author: 'אבי שמש', role: 'בעלים · KILO', avatar: 'A', side: 'left', text: '3 סניפים, 67 ספקים. פיבוט הוא ה-1 שמדבר עם כולם בבת אחת בלי לאבד שום הזמנה.', time: 'לפני חודש', stars: 5 },
-    { author: 'נועה אדרי', role: 'מנהלת · מרים בר', avatar: 'N', side: 'right', text: 'החשבונאית שלי שלחה לי פרחים. זה לא מטאפורה — פיזית פרחים.', time: 'אתמול', stars: 5 },
     { author: 'איציק טל', role: 'שף-בעלים · OISO', avatar: 'I', side: 'left', text: 'עברנו 4 מערכות בעבר. פיבוט הוא הראשונה שצוות המטבח באמת השתמש בה.', time: 'לפני 5 ימים', stars: 5 },
   ];
   return (
@@ -1715,7 +1716,7 @@ function Waitlist({ blue }) {
           marginBottom: 48,
           maxWidth: 1000,
         }}>
-          30 ימי התנסות מלאה.<br/>
+          14 ימי התנסות על 5 ספקים.<br/>
           <span style={{
             background: '#000', padding: '8px 24px', display: 'inline-block',
             borderRadius: 16, marginTop: 20,
