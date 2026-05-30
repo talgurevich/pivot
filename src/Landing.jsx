@@ -1028,8 +1028,8 @@ function BentoFeatures() {
           <div style={{ fontSize: 14, color: '#8C8C8C' }}>06 כלים · מערכת אחת</div>
         </div>
         <h2 className="pivot-h2" style={{ marginBottom: 16, maxWidth: 1100 }}>
-          הזמנה מאושרת.<br/>
-          מתועדת. <span style={{ color: '#1A2BFB' }}>מסודרת.</span>
+          כמו שותף<br/>
+          <span style={{ color: '#1A2BFB' }}>שלא מבקש אחוזים.</span>
         </h2>
         <p style={{ fontSize: 22, lineHeight: 1.45, color: '#4A4A4A', maxWidth: 700, marginBottom: 56 }}>
           בלי לרדוף. בלי לחפש. בלי לנחש.
@@ -1582,11 +1582,11 @@ function Advantages() {
 // ============================================================
 function WhatsAppReviews() {
   const messages = [
-    { author: 'מיכל ברקן', role: 'בעלים · Sapore', avatar: 'M', side: 'right', text: 'חסכנו שעתיים ביום, אבל החיסכון האמיתי הוא בראש. אני כבר לא חולם בלילה על מי שכחתי להזמין.', time: 'לפני 3 ימים', stars: 5, featured: true },
-    { author: 'יוסי לוי', role: 'מנהל רכש · בייקרי 12', avatar: 'Y', side: 'left', text: 'הספקים מתאהבים בזה לפני שאנחנו. ההזמנות מגיעות מסודרות — בלי הודעות קוליות בני 8 דקות.', time: 'לפני שבוע', stars: 5 },
-    { author: 'דנה קרן', role: 'CFO · נומאד', avatar: 'D', side: 'right', text: 'בחודש הראשון תפסנו טעות חיוב של ₪14,000. פיבוט החזיר את עצמו פי 50 בשבוע. נקודה.', time: 'לפני שבועיים', stars: 5 },
-    { author: 'אבי שמש', role: 'בעלים · KILO', avatar: 'A', side: 'left', text: '3 סניפים, 67 ספקים. פיבוט הוא ה-1 שמדבר עם כולם בבת אחת בלי לאבד שום הזמנה.', time: 'לפני חודש', stars: 5 },
-    { author: 'איציק טל', role: 'שף-בעלים · OISO', avatar: 'I', side: 'left', text: 'עברנו 4 מערכות בעבר. פיבוט הוא הראשונה שצוות המטבח באמת השתמש בה.', time: 'לפני 5 ימים', stars: 5 },
+    { author: 'אביב זנו', role: 'בעלים', avatar: 'א', side: 'right', text: 'אחרי חצי שנה עם פיבוט שמתי לב שאני כמעט לא מדבר עם מנהל המטבח על הזמנות. הכל מתועד, הספקים מקבלים את מה שצריך, והזמן שהתפנה הולך לשיפור תהליכים אחרים במסעדה.', time: 'לפני שבועיים', stars: 5, featured: true },
+    { author: 'אנסטסיה', role: 'מנהלת מטבח', avatar: 'א', side: 'left', text: 'פיבוט הורידה ממני את הלחץ של סוף משמרת — אני רואה מה חסר, שולחת הזמנה מסודרת וממשיכה לעבוד.', time: 'אתמול', stars: 5 },
+    { author: 'דור', role: 'יועץ עסקי', avatar: 'ד', side: 'right', text: 'הכוח של פיבוט הוא שהיא לא משנה למסעדה את ההרגלים — היא פשוט עושה סדר במקום שהכי כואב.', time: 'לפני 4 ימים', stars: 5 },
+    { author: 'תומר', role: 'בעלים', avatar: 'ת', side: 'left', text: 'מאז שפיבוט נכנסה, יש פחות שאלות, פחות טלפונים והרבה יותר שקט סביב ההזמנות.', time: 'לפני שבוע', stars: 5 },
+    { author: 'אלון', role: 'מנהל בר', avatar: 'א', side: 'right', text: 'עם פיבוט לא חסר לי כלום בבר — עד רמת הקישוט, והכל נשאר מתועד בווטסאפ.', time: 'לפני 3 ימים', stars: 5 },
   ];
   return (
     <section id="reviews" style={{ background: '#fff', padding: 'clamp(64px, 9vw, 120px) clamp(20px, 5vw, 80px)', position: 'relative', overflow: 'hidden' }}>
