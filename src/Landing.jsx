@@ -260,13 +260,25 @@ function scrollToId(id) {
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// Footer items that point to real pages/anchors. Items not in this map render as plain text.
-const FOOTER_HREFS = {
-  'תנאי שימוש': './terms.html',
-  'מדיניות פרטיות': './privacy.html',
-  'אבטחה': './privacy.html#security',
-  'GDPR': './privacy.html#rights',
-  'עוגיות': './privacy.html#cookies',
+// Footer item actions. Items not in this map render as plain text.
+//   { href, target? } → <a>
+//   { scrollTo }      → <span> that smooth-scrolls to a section id
+const FOOTER_ACTIONS = {
+  // Product → in-page sections
+  'תכונות': { scrollTo: 'features' },
+  'איך זה עובד': { scrollTo: 'how' },
+  'מחירים': { scrollTo: 'join' },
+  // Company → WhatsApp
+  'יצירת קשר': {
+    href: 'https://wa.me/97283761057?text=' + encodeURIComponent('שלום, אשמח ליצור קשר לגבי Pivot Level.'),
+    target: '_blank',
+  },
+  // Legal
+  'תנאי שימוש': { href: './terms.html' },
+  'מדיניות פרטיות': { href: './privacy.html' },
+  'אבטחה': { href: './privacy.html#security' },
+  'GDPR': { href: './privacy.html#rights' },
+  'עוגיות': { href: './privacy.html#cookies' },
 };
 
 const NAV_LINKS = [
@@ -1825,16 +1837,15 @@ function BulletItem({ t }) {
 function Footer() {
   const isMobile = useIsMobile();
   const cols = [
-    { title: 'מוצר', items: ['תכונות', 'איך זה עובד', 'אינטגרציות', 'מחירים', 'API ומפתחים'] },
-    { title: 'חברה', items: ['אודות', 'הצוות', 'דרושים', 'בלוג', 'יצירת קשר'] },
-    { title: 'משאבים', items: ['מרכז עזרה', 'מדריכים', 'סטטוס', 'שינויי גרסה', 'תאימות'] },
+    { title: 'מוצר', items: ['תכונות', 'איך זה עובד', 'מחירים'] },
+    { title: 'חברה', items: ['אודות', 'הצוות', 'דרושים', 'יצירת קשר'] },
     { title: 'משפטי', items: ['תנאי שימוש', 'מדיניות פרטיות', 'אבטחה', 'GDPR', 'עוגיות'] },
   ];
   return (
     <footer style={{ background: '#000', color: '#fff' }}>
       <div style={{ padding: 'clamp(48px, 8vw, 80px) clamp(20px, 5vw, 80px) 32px', maxWidth: 1440, margin: '0 auto' }}>
         <div style={{
-          display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : '1.5fr repeat(4, 1fr)', gap: isMobile ? 32 : 60,
+          display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : '1.5fr repeat(3, 1fr)', gap: isMobile ? 32 : 60,
           paddingBottom: 64,
         }}>
           <div>
@@ -1857,10 +1868,23 @@ function Footer() {
               <div className="pivot-eyebrow" style={{ color: 'rgba(255,255,255,0.5)', marginBottom: 18 }}>{c.title}</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {c.items.map((it, j) => {
-                  const href = FOOTER_HREFS[it];
-                  return href
-                    ? <a key={j} className="pivot-footer-link" href={href}>{it}</a>
-                    : <span key={j} className="pivot-footer-link">{it}</span>;
+                  const act = FOOTER_ACTIONS[it];
+                  if (act && act.href) {
+                    return (
+                      <a key={j} className="pivot-footer-link" href={act.href}
+                        target={act.target} rel={act.target === '_blank' ? 'noopener noreferrer' : undefined}>
+                        {it}
+                      </a>
+                    );
+                  }
+                  if (act && act.scrollTo) {
+                    return (
+                      <span key={j} className="pivot-footer-link" onClick={() => scrollToId(act.scrollTo)}>
+                        {it}
+                      </span>
+                    );
+                  }
+                  return <span key={j} className="pivot-footer-link">{it}</span>;
                 })}
               </div>
             </div>
