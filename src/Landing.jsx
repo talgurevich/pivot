@@ -1789,6 +1789,10 @@ function Waitlist({ blue }) {
             />
             <button className="pivot-btn pivot-btn-blue" style={{
               width: '100%', height: 68, fontSize: 18, background: blue,
+            }}
+            onClick={() => {
+              const msg = `שלום, אשמח לקבל גישה ל-Pivot Level.\nאימייל: ${email || '(לא צויין)'}`;
+              window.open(`https://wa.me/97283761057?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
             }}>
               קבלו גישה עכשיו →
             </button>
