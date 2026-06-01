@@ -87,18 +87,6 @@ function Manifesto() {
       }} />
 
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative' }}>
-        {/* Mini header row */}
-        <div style={{
-          display: 'flex', alignItems: 'center', gap: 24,
-          marginBottom: 56,
-        }}>
-          <div className="pivot-eyebrow" style={{ color: '#1A2BFB' }}>שפת המותג · 2026</div>
-          <div className="pivot-hairline" style={{ flex: 1 }} />
-          <div style={{ fontSize: 12, color: '#8C8C8C', fontFamily: 'Rubik, monospace', letterSpacing: '0.06em' }}>
-            01 / 04 · MANIFESTO
-          </div>
-        </div>
-
         {/* Hero statement — staggered editorial */}
         <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'auto 1fr', gap: isMobile ? 32 : 60, alignItems: 'start', marginBottom: isMobile ? 48 : 80 }}>
           {/* Side column — vertical brand mark (hidden on mobile) */}
@@ -108,7 +96,7 @@ function Manifesto() {
             minWidth: 60,
           }}>
             <div className="pivot-vertical-tag" style={{ color: '#8C8C8C' }}>
-              PIVOT LEVEL · TLV
+              PIVOT LEVEL
             </div>
             <div style={{
               width: 1, height: 80, background: '#000', opacity: 0.2,
@@ -759,7 +747,7 @@ function BrandMarquee() {
     <section style={{ background: '#fff', borderTop: '1px solid #E8E8E8', borderBottom: '1px solid #E8E8E8', padding: '40px 0' }}>
       <div className="pivot-eyebrow" style={{
         textAlign: 'center', color: '#8C8C8C', marginBottom: 28,
-      }}>240+ מסעדות מובחרות בישראל כבר עברו לפיבוט</div>
+      }}>נולד מהשטח. נבנה ממסעדן למסעדנים. מחזיר שליטה לחומר שנכנס למסעדה.</div>
       <ScrollMarquee speed="slow" gap={72}>
         {[...VANITY_LOGOS, ...VANITY_LOGOS].map((l, i) => (
           <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 72 }}>
@@ -1064,10 +1052,12 @@ function BentoFeatures() {
               מצבת בסיס, ספירות לפי מחלקה, חוסרים מול Par Level — והכנת הזמנה לפי מה שבאמת חסר.
             </p>
             <div style={{
-              transform: 'scale(0.75)', transformOrigin: 'bottom right',
-              marginRight: -100, marginBottom: -80, marginTop: 'auto',
+              marginTop: 'auto', marginRight: -28, marginLeft: -28, marginBottom: -28,
+              borderRadius: 14, overflow: 'hidden',
+              boxShadow: '0 24px 60px -16px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06)',
             }}>
-              <DashboardOrders width={760} height={460} />
+              <img src="assets/app-dashboard.png" alt="Pivot — מסך עריכת ספק"
+                style={{ width: '100%', height: 'auto', display: 'block' }} />
             </div>
           </BentoCell>
 
@@ -1169,7 +1159,7 @@ function BentoFeatures() {
                 {[
                   { sup: 'ספק בשר', cut: '11:00', deliv: 'מחר 06:00', urgent: true },
                   { sup: 'ספק משקאות', cut: '14:00', deliv: 'מחר 09:00' },
-                  { sup: 'ספק חלב', cut: 'אושר ✓', deliv: 'יום ה׳' },
+                  { sup: 'ספק דגים', cut: 'אושר ✓', deliv: 'יום ה׳' },
                 ].map((s, i) => (
                   <div key={i} style={{
                     flex: 1,
@@ -1263,7 +1253,7 @@ const TALK_PRESETS = [
   },
   {
     q: 'איזה ספק צריך הזמנה היום?',
-    a: '🚚 ספק בשר — עד 11:00\n🚚 ספק משקאות — עד 14:00\n✅ ספק חלב כבר אושר',
+    a: '🚚 ספק בשר — עד 11:00\n🚚 ספק משקאות — עד 14:00\n✅ ספק דגים כבר אושר',
   },
   {
     q: 'מי הזמין אתמול?',
@@ -1275,7 +1265,7 @@ function TalkToInventory() {
   const isMobile = useIsMobile();
   const [thread, setThread] = useStateWeb([
     { from: 'me', text: 'איזה ספק צריך הזמנה היום?' },
-    { from: 'bot', text: '🚚 ספק בשר — עד 11:00\n🚚 ספק משקאות — עד 14:00\n✅ ספק חלב כבר אושר' },
+    { from: 'bot', text: '🚚 ספק בשר — עד 11:00\n🚚 ספק משקאות — עד 14:00\n✅ ספק דגים כבר אושר' },
   ]);
   const [typing, setTyping] = useStateWeb(false);
 
