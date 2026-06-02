@@ -1036,36 +1036,36 @@ function BentoFeatures() {
             <p style={{ fontSize: 17, lineHeight: 1.5, color: 'rgba(255,255,255,0.85)', maxWidth: 480, margin: '0 0 32px' }}>
               מצבת בסיס, ספירות לפי מחלקה, חוסרים מול Par Level — והכנת הזמנה לפי מה שבאמת חסר.
             </p>
+            {/* MacBook frame — laptop chassis is a transparent PNG;
+                the dashboard screenshot is positioned absolutely inside
+                the screen area (measured from the asset: 21.7% / 25.6%
+                / 56.7% / 46.7%). */}
+            {/* MacBook frame is the back layer; dashboard is overlaid on
+                top of the laptop's stock green-gradient screen using the
+                screen-area percentages measured from the asset. */}
             <div style={{
               marginTop: 'auto', marginRight: -28, marginLeft: -28, marginBottom: -28,
-              borderRadius: 14, overflow: 'hidden',
-              boxShadow: '0 24px 60px -16px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.1)',
-              background: '#0a0a0a',
+              position: 'relative',
+              aspectRatio: '600 / 450',
+              filter: 'drop-shadow(0 24px 40px rgba(0,0,0,0.35))',
             }}>
-              {/* Mac-style title bar */}
-              <div style={{
-                height: 34,
-                background: 'linear-gradient(180deg, #2c2c2c 0%, #1c1c1c 100%)',
-                borderBottom: '1px solid rgba(255,255,255,0.06)',
-                display: 'flex', alignItems: 'center',
-                padding: '0 14px', gap: 8,
-                direction: 'ltr',
-              }}>
-                <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#FF5F57',
-                  boxShadow: 'inset 0 0 0 0.5px rgba(0,0,0,0.2)' }} />
-                <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#FEBC2E',
-                  boxShadow: 'inset 0 0 0 0.5px rgba(0,0,0,0.2)' }} />
-                <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#28C840',
-                  boxShadow: 'inset 0 0 0 0.5px rgba(0,0,0,0.2)' }} />
-                <div style={{
-                  flex: 1, textAlign: 'center',
-                  fontSize: 11, color: 'rgba(255,255,255,0.45)',
-                  fontFamily: 'Rubik, monospace', letterSpacing: '0.03em',
-                  marginRight: 36, // balances the traffic-light width on the left
-                }}>app.pivott.digital — עריכת ספק</div>
-              </div>
+              <img src="assets/macbook-frame.png" alt="" aria-hidden="true"
+                style={{
+                  position: 'absolute', inset: 0,
+                  width: '100%', height: '100%',
+                  display: 'block',
+                  pointerEvents: 'none',
+                }} />
               <img src="assets/app-dashboard.png" alt="Pivot — מסך עריכת ספק"
-                style={{ width: '100%', height: 'auto', display: 'block' }} />
+                style={{
+                  position: 'absolute',
+                  top: '24.7%',
+                  left: '21.2%',
+                  width: '57.5%',
+                  height: '47.6%',
+                  objectFit: 'cover',
+                  display: 'block',
+                }} />
             </div>
           </BentoCell>
 
