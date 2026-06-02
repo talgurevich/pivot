@@ -941,7 +941,7 @@ function HowItWorks() {
       n: '04',
       title: 'קליטה',
       body: 'קליטת הסחורה והחשבונית נסגרות במקום אחד. השוואה למחיר עבר אוטומטית.',
-      side: 'OCR · חשבשבת',
+      side: 'חשבשבת',
     },
     {
       n: '05',
@@ -1112,11 +1112,11 @@ function BentoFeatures() {
             </div>
           </BentoCell>
 
-          {/* INVOICE OCR — black square */}
+          {/* INVOICES — black square */}
           <BentoCell colSpan={2} rowSpan={2} bg="#000" color="#fff">
-            <BentoLabel num="03" sticker="receipt" stickerColor="#fff" label="חשבוניות OCR" color="rgba(255,255,255,0.7)" />
+            <BentoLabel num="03" sticker="receipt" stickerColor="#fff" label="חשבוניות" color="rgba(255,255,255,0.7)" />
             <h3 style={{ fontSize: 30, fontWeight: 900, letterSpacing: '-0.02em', lineHeight: 1, margin: '16px 0 12px' }}>
-              צילום → השוואה<br/>למחירי עבר.
+              השוואה אוטומטית<br/>למחירי עבר.
             </h3>
             <div style={{
               fontSize: 76, fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 0.85,
