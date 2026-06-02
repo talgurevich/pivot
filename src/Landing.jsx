@@ -333,8 +333,9 @@ function SiteHeader({ blue }) {
       </nav>
       <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
         {!navCompact && (
-          <a className="pivot-nav-link" href="https://pivott.digital/login"
-            target="_blank" rel="noopener noreferrer">התחברות</a>
+          <a className="pivot-nav-link"
+            href={'https://wa.me/972506704488?text=' + encodeURIComponent('שלום, אשמח לקבל מידע על Pivot Level.')}
+            target="_blank" rel="noopener noreferrer">דברו איתנו</a>
         )}
         <button type="button" className="pivot-btn pivot-btn-blue pivot-btn-sm"
           style={{ background: blue }}
@@ -559,7 +560,8 @@ function Hero({ blue }) {
             </div>
 
             <div style={{ display: 'flex', gap: 12, marginBottom: 24, flexWrap: 'wrap' }}>
-              <a className="pivot-btn pivot-btn-white" href="https://pivott.digital/login"
+              <a className="pivot-btn pivot-btn-white"
+                href={'https://wa.me/972506704488?text=' + encodeURIComponent('שלום, אשמח לראות איך Pivot Level עובד.')}
                 target="_blank" rel="noopener noreferrer">לראות איך זה עובד <span aria-hidden="true">▷</span></a>
             </div>
             <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)' }}>
