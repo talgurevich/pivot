@@ -44,17 +44,20 @@ function LandingWeb({ tweaks = {} }) {
 
   return (
     <div className="pivot" ref={rootRef} style={{ width: '100%', minHeight: '100%' }}>
-      <Hero blue={blue} />
-      <BrandMarquee />
-      <Manifesto />
-      <MegaStat />
-      <HowItWorks />
-      <BentoFeatures />
-      <TalkToInventory />
-      <Advantages />
-      <WhatsAppReviews />
-      <InsuranceTagline />
-      <Waitlist blue={blue} />
+      <SiteHeader blue={blue} />
+      <main id="main-content">
+        <Hero blue={blue} />
+        <BrandMarquee />
+        <Manifesto />
+        <MegaStat />
+        <HowItWorks />
+        <BentoFeatures />
+        <TalkToInventory />
+        <Advantages />
+        <WhatsAppReviews />
+        <InsuranceTagline />
+        <Waitlist blue={blue} />
+      </main>
       <Footer />
     </div>
   );
@@ -95,7 +98,7 @@ function Manifesto() {
             alignItems: 'center', gap: 32, paddingTop: 24,
             minWidth: 60,
           }}>
-            <div className="pivot-vertical-tag" style={{ color: '#8C8C8C' }}>
+            <div className="pivot-vertical-tag" style={{ color: '#6F6F6F' }}>
               PIVOT LEVEL
             </div>
             <div style={{
@@ -108,7 +111,7 @@ function Manifesto() {
             <div style={{
               fontFamily: 'Rubik, monospace',
               fontSize: 10, letterSpacing: '0.08em',
-              color: '#8C8C8C', writingMode: 'vertical-rl',
+              color: '#6F6F6F', writingMode: 'vertical-rl',
               transform: 'rotate(180deg)',
             }}>EST. 2024</div>
           </div>
@@ -203,7 +206,7 @@ function Manifesto() {
           <div style={{ textAlign: 'left' }}>
             <div style={{
               fontFamily: 'Rubik, monospace', fontSize: 11,
-              letterSpacing: '0.1em', color: '#8C8C8C',
+              letterSpacing: '0.1em', color: '#6F6F6F',
               marginBottom: 12,
             }}>WE BELIEVE</div>
             <div style={{
@@ -222,7 +225,7 @@ function Manifesto() {
           <div>
             <div style={{
               fontFamily: 'Rubik, monospace', fontSize: 11,
-              letterSpacing: '0.1em', color: '#8C8C8C',
+              letterSpacing: '0.1em', color: '#6F6F6F',
               marginBottom: 12,
             }}>WE BUILD FOR</div>
             <div style={{
@@ -258,12 +261,13 @@ const FOOTER_ACTIONS = {
   'מחירים': { scrollTo: 'join' },
   // Company → WhatsApp
   'יצירת קשר': {
-    href: 'https://wa.me/97283761057?text=' + encodeURIComponent('שלום, אשמח ליצור קשר לגבי Pivot Level.'),
+    href: 'https://wa.me/972506704488?text=' + encodeURIComponent('שלום, אשמח ליצור קשר לגבי Pivot Level.'),
     target: '_blank',
   },
   // Legal
   'תנאי שימוש': { href: './terms.html' },
   'מדיניות פרטיות': { href: './privacy.html' },
+  'נגישות': { href: './accessibility.html' },
   'אבטחה': { href: './privacy.html#security' },
   'GDPR': { href: './privacy.html#rights' },
   'עוגיות': { href: './privacy.html#cookies' },
@@ -299,9 +303,52 @@ const HERO_STICKERS = [
   { name: 'cola',     size: 39,  from: 'right', pos: { bottom: 200, left: '50%' },  tx: 145,  rot: -6,  shadow: '0 12px 20px rgba(0,0,0,0.4)' },
 ];
 
+// ============================================================
+// SITE HEADER — sticky top bar, separated from Hero so <main>
+// can wrap the rest of the page as a single landmark (IS 5568 §1.3.1)
+// ============================================================
+function SiteHeader({ blue }) {
+  const navCompact = useIsMobile(940);
+  return (
+    <header role="banner" style={{
+      background: 'rgba(6,8,34,0.92)',
+      height: 68,
+      backdropFilter: 'blur(16px) saturate(150%)',
+      WebkitBackdropFilter: 'blur(16px) saturate(150%)',
+      borderBottom: '1px solid rgba(255,255,255,0.08)',
+      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+      padding: '0 clamp(16px, 4vw, 48px)',
+      position: 'sticky', top: 0, zIndex: 50,
+      color: '#fff',
+    }}>
+      <Wordmark size={18} color="#fff" onDark={true} />
+      <nav aria-label="ניווט ראשי"
+        style={{ display: navCompact ? 'none' : 'flex', gap: 32, fontSize: 14, fontWeight: 600, color: 'rgba(255,255,255,0.85)' }}>
+        {NAV_LINKS.map((l) => (
+          <button key={l.id} type="button" className="pivot-nav-link"
+            onClick={() => scrollToId(l.id)}>
+            {l.label}
+          </button>
+        ))}
+      </nav>
+      <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+        {!navCompact && (
+          <a className="pivot-nav-link" href="https://pivott.digital/login"
+            target="_blank" rel="noopener noreferrer">התחברות</a>
+        )}
+        <button type="button" className="pivot-btn pivot-btn-blue pivot-btn-sm"
+          style={{ background: blue }}
+          onClick={() => scrollToId('join')}>
+          <span>התנסו</span>
+          <span aria-hidden="true">←</span>
+        </button>
+      </div>
+    </header>
+  );
+}
+
 function Hero({ blue }) {
   const isMobile = useIsMobile();
-  const navCompact = useIsMobile(940);
 
   // Replay the phone + sticker fly-in every time the hero scrolls into view.
   const stageRef = React.useRef(null);
@@ -325,6 +372,10 @@ function Hero({ blue }) {
   // unresponsive on weaker devices).
   const ghostRef = React.useRef(null);
   React.useEffect(() => {
+    if (typeof window !== 'undefined'
+      && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
     let raf = 0;
     const apply = () => {
       raf = 0;
@@ -363,47 +414,7 @@ function Hero({ blue }) {
         mixBlendMode: 'screen',
       }} />
 
-      {/* Top bar */}
-      <div style={{
-        background: 'rgba(6,8,34,0.72)', height: 68,
-        backdropFilter: 'blur(16px) saturate(150%)',
-        WebkitBackdropFilter: 'blur(16px) saturate(150%)',
-        borderBottom: '1px solid rgba(255,255,255,0.08)',
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '0 clamp(16px, 4vw, 48px)',
-        position: 'relative', zIndex: 5,
-      }}>
-        <Wordmark size={18} color="#fff" onDark={true} />
-        <div style={{ display: navCompact ? 'none' : 'flex', gap: 32, fontSize: 14, fontWeight: 600, color: 'rgba(255,255,255,0.85)' }}>
-          {NAV_LINKS.map((l) => (
-            <span key={l.id} className="pivot-nav-link" onClick={() => scrollToId(l.id)}>
-              {l.label}
-            </span>
-          ))}
-        </div>
-        <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-          {!navCompact && (
-            <a className="pivot-nav-link" href="https://pivott.digital/login"
-              target="_blank" rel="noopener noreferrer">התחברות</a>
-          )}
-          <button className="pivot-btn pivot-btn-blue pivot-btn-sm" style={{ background: blue }}
-            onClick={() => scrollToId('join')}>
-            <span>נסו חינם</span>
-            <span aria-hidden="true">←</span>
-          </button>
-        </div>
-      </div>
 
-      {/* Top live-activity ticker — sits right under the top bar */}
-      <div style={{
-        background: 'rgba(0,0,0,0.5)',
-        borderBottom: '1px solid rgba(255,255,255,0.15)',
-        padding: '10px 0',
-        position: 'relative', zIndex: 5,
-        backdropFilter: 'blur(4px)',
-      }}>
-        <LiveTicker />
-      </div>
 
       {/* Hero body */}
       <div style={{
@@ -427,15 +438,6 @@ function Hero({ blue }) {
             <StickerIcon name="bolt" size={18} />
             WHATSAPP-FIRST · ניהול מלאי
           </span>
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: 6,
-            fontSize: 12, fontWeight: 700, letterSpacing: '0.06em',
-            color: 'rgba(255,255,255,0.7)',
-            fontFamily: 'Rubik, sans-serif', textTransform: 'uppercase',
-          }}>
-            <span className="pivot-pulse-dot" style={{ width: 7, height: 7, borderRadius: 999, background: '#fff' }} />
-            240+ מסעדות
-          </div>
         </div>
 
         {/* HUGE display headline (full-width) */}
@@ -558,10 +560,10 @@ function Hero({ blue }) {
 
             <div style={{ display: 'flex', gap: 12, marginBottom: 24, flexWrap: 'wrap' }}>
               <a className="pivot-btn pivot-btn-white" href="https://pivott.digital/login"
-                target="_blank" rel="noopener noreferrer">לראות איך זה עובד ▷</a>
+                target="_blank" rel="noopener noreferrer">לראות איך זה עובד <span aria-hidden="true">▷</span></a>
             </div>
             <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)' }}>
-              ✓ ללא כרטיס אשראי &nbsp;·&nbsp; ✓ ביטול בכל רגע &nbsp;·&nbsp; ✓ עברית מלאה
+              ✓ 30 ימי התנסות חינם
             </div>
           </div>
         </div>
@@ -746,12 +748,12 @@ function BrandMarquee() {
   return (
     <section style={{ background: '#fff', borderTop: '1px solid #E8E8E8', borderBottom: '1px solid #E8E8E8', padding: '40px 0' }}>
       <div className="pivot-eyebrow" style={{
-        textAlign: 'center', color: '#8C8C8C', marginBottom: 28,
+        textAlign: 'center', color: '#6F6F6F', marginBottom: 28,
       }}>נולד מהשטח. נבנה ממסעדן למסעדנים. מחזיר שליטה לחומר שנכנס למסעדה.</div>
       <ScrollMarquee speed="slow" gap={72}>
         {[...VANITY_LOGOS, ...VANITY_LOGOS].map((l, i) => (
           <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 72 }}>
-            <div style={{ ...l.style, color: '#8C8C8C', opacity: 0.85, fontSize: 32 }}>{l.name}</div>
+            <div style={{ ...l.style, color: '#6F6F6F', opacity: 0.85, fontSize: 32 }}>{l.name}</div>
             <StickerSparkle size={14} color="#E8E8E8" />
           </div>
         ))}
@@ -773,6 +775,12 @@ function CountUp({ value, decimals = 0, prefix = '', suffix = '', duration = 170
   React.useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    const reduce = typeof window !== 'undefined'
+      && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+      setDisplay(value);
+      return;
+    }
     let raf = 0;
     let started = false;
     const run = () => {
@@ -843,28 +851,10 @@ function MegaStat() {
           marginBottom: 32,
         }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 28 }}>
-              <div className="pivot-eyebrow" style={{ color: '#1A2BFB' }}>היקף השנה</div>
-              <span className="pivot-pulse-dot" style={{ width: 8, height: 8, borderRadius: 999, background: '#1A2BFB' }} />
-              <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', fontFamily: 'Rubik, monospace', letterSpacing: '0.06em' }}>LIVE</div>
-            </div>
             <h2 className="pivot-h2" style={{ marginBottom: 0 }}>
               המסעדות שלנו<br/>
               חוסכות יחד.
             </h2>
-          </div>
-          <div style={{
-            display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 10,
-          }}>
-            <div className="pivot-pill" style={{
-              background: 'rgba(26,43,251,0.15)',
-              border: '1px solid rgba(26,43,251,0.3)',
-              color: '#fff',
-            }}>
-              <span style={{ width: 6, height: 6, borderRadius: 999, background: '#1A2BFB' }} />
-              בזמן אמת
-            </div>
-            <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)' }}>נכון לרגע זה ↓</div>
           </div>
         </div>
 
@@ -899,9 +889,8 @@ function MegaStat() {
           borderTop: '1px solid rgba(255,255,255,0.12)',
         }}>
           <SubStat value={12840} label="הזמנות שעובדו" />
-          <SubStat value={240} label="מסעדות פעילות" />
           <SubStat value={2300} suffix="+" label="ספקים במערכת" />
-          <SubStat value={187} suffix="h" label="חיסכון יומי מצרפי" />
+          <SubStat value={187} suffix="h" label="חסכון יומי מצטבר" />
         </div>
       </div>
     </section>
@@ -969,10 +958,10 @@ function HowItWorks() {
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 24, marginBottom: 32 }}>
           <div className="pivot-eyebrow" style={{ color: '#1A2BFB' }}>הסדר</div>
           <div style={{ flex: 1, height: 1, background: '#E8E8E8' }} />
-          <div style={{ fontSize: 14, color: '#8C8C8C' }}>05 שלבים · זרם עבודה אחד</div>
+          <div style={{ fontSize: 14, color: '#6F6F6F' }}>05 שלבים · זרם עבודה אחד</div>
         </div>
         <h2 className="pivot-h2" style={{ marginBottom: 16, maxWidth: 900 }}>
-          הסדר שפיבוט<br/>
+          הסדר ש-Pivot<br/>
           <span style={{ color: '#1A2BFB' }}>מייצרת.</span>
         </h2>
         <p style={{ fontSize: 22, lineHeight: 1.45, color: '#4A4A4A', maxWidth: 800, marginBottom: 72 }}>
@@ -999,12 +988,6 @@ function HowItWorks() {
               }}>{s.n}</div>
               <h3 style={{ fontSize: 32, fontWeight: 900, letterSpacing: '-0.02em', lineHeight: 1, margin: 0 }}>{s.title}</h3>
               <p style={{ fontSize: 15, lineHeight: 1.55, color: '#4A4A4A', margin: 0 }}>{s.body}</p>
-              <div style={{
-                fontSize: 11, fontWeight: 700, color: '#8C8C8C',
-                letterSpacing: '0.08em', textTransform: 'uppercase',
-                marginTop: 'auto', paddingTop: 8,
-                fontFamily: 'Rubik, monospace',
-              }}>{s.side}</div>
             </div>
           ))}
         </div>
@@ -1025,7 +1008,7 @@ function BentoFeatures() {
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 24, marginBottom: 32 }}>
           <div className="pivot-eyebrow" style={{ color: '#1A2BFB' }}>היכולות של פיבוט</div>
           <div style={{ flex: 1, height: 1, background: '#E8E8E8' }} />
-          <div style={{ fontSize: 14, color: '#8C8C8C' }}>06 כלים · מערכת אחת</div>
+          <div style={{ fontSize: 14, color: '#6F6F6F' }}>06 כלים · מערכת אחת</div>
         </div>
         <h2 className="pivot-h2" style={{ marginBottom: 16, maxWidth: 1100 }}>
           כמו שותף<br/>
@@ -1054,8 +1037,31 @@ function BentoFeatures() {
             <div style={{
               marginTop: 'auto', marginRight: -28, marginLeft: -28, marginBottom: -28,
               borderRadius: 14, overflow: 'hidden',
-              boxShadow: '0 24px 60px -16px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06)',
+              boxShadow: '0 24px 60px -16px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.1)',
+              background: '#0a0a0a',
             }}>
+              {/* Mac-style title bar */}
+              <div style={{
+                height: 34,
+                background: 'linear-gradient(180deg, #2c2c2c 0%, #1c1c1c 100%)',
+                borderBottom: '1px solid rgba(255,255,255,0.06)',
+                display: 'flex', alignItems: 'center',
+                padding: '0 14px', gap: 8,
+                direction: 'ltr',
+              }}>
+                <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#FF5F57',
+                  boxShadow: 'inset 0 0 0 0.5px rgba(0,0,0,0.2)' }} />
+                <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#FEBC2E',
+                  boxShadow: 'inset 0 0 0 0.5px rgba(0,0,0,0.2)' }} />
+                <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#28C840',
+                  boxShadow: 'inset 0 0 0 0.5px rgba(0,0,0,0.2)' }} />
+                <div style={{
+                  flex: 1, textAlign: 'center',
+                  fontSize: 11, color: 'rgba(255,255,255,0.45)',
+                  fontFamily: 'Rubik, monospace', letterSpacing: '0.03em',
+                  marginRight: 36, // balances the traffic-light width on the left
+                }}>app.pivott.digital — עריכת ספק</div>
+              </div>
               <img src="assets/app-dashboard.png" alt="Pivot — מסך עריכת ספק"
                 style={{ width: '100%', height: 'auto', display: 'block' }} />
             </div>
@@ -1081,17 +1087,21 @@ function BentoFeatures() {
                 'מה מחכה לאישור?',
                 'מי הזמין אתמול?',
                 'איזה ספק נסגר ב-14:00?',
+                'כמה הוצאנו השבוע?',
+                'מה מחיר הסלמון היום?',
+                'מתי המשלוח הבא?',
+                'איזה ספק עלה במחיר?',
               ].map((q, i) => (
                 <div key={i} style={{
-                  padding: '11px 14px', borderRadius: 12,
-                  background: i === 0 ? '#1A2BFB' : '#F5F5F5',
-                  color: i === 0 ? '#fff' : '#000',
+                  padding: '9px 13px', borderRadius: 12,
+                  background: '#F5F5F5',
+                  color: '#000',
                   fontSize: 13, fontWeight: 600,
                   display: 'flex', alignItems: 'center', gap: 8,
                 }}>
                   <span style={{
                     width: 4, height: 4, borderRadius: 999,
-                    background: i === 0 ? '#fff' : '#1A2BFB',
+                    background: '#1A2BFB',
                     flexShrink: 0,
                   }} />
                   {q}
@@ -1297,12 +1307,8 @@ function TalkToInventory() {
         style={{ position: 'absolute', bottom: 80, left: 54, zIndex: 0 }} />
 
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1 }}>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: 24, marginBottom: 40 }}>
-          <div className="pivot-eyebrow" style={{ color: '#1A2BFB' }}>אינטראקטיבי · נסו עכשיו</div>
-          <div className="pivot-hairline" style={{ flex: 1 }} />
-          <div style={{ fontSize: 12, color: '#8C8C8C', fontFamily: 'Rubik, monospace', letterSpacing: '0.06em' }}>
-            LIVE · TRY ME
-          </div>
+        <div style={{ marginBottom: 40 }}>
+          <div className="pivot-hairline" />
         </div>
         <h2 className="pivot-h2" style={{ marginBottom: 24, maxWidth: 1000 }}>
           דברו עם המלאי.<br/>
@@ -1318,7 +1324,7 @@ function TalkToInventory() {
         }}>
           {/* Preset questions — refined */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <div className="pivot-eyebrow" style={{ color: '#8C8C8C', marginBottom: 16 }}>שאלות לדוגמה</div>
+            <div className="pivot-eyebrow" style={{ color: '#6F6F6F', marginBottom: 16 }}>שאלות לדוגמה</div>
             {TALK_PRESETS.map((p, i) => (
               <button key={i} onClick={() => ask(p)}
                 style={{
@@ -1348,7 +1354,7 @@ function TalkToInventory() {
                   e.currentTarget.style.boxShadow = '0 1px 2px rgba(0,0,0,0.03)';
                 }}>
                 <span>{p.q}</span>
-                <span style={{ fontSize: 16, fontFamily: 'Rubik, sans-serif' }}>↙</span>
+                <span aria-hidden="true" style={{ fontSize: 16, fontFamily: 'Rubik, sans-serif' }}>↙</span>
               </button>
             ))}
           </div>
@@ -1412,10 +1418,14 @@ function TalkToInventory() {
             </div>
 
             {/* Messages */}
-            <div style={{
-              flex: 1, display: 'flex', flexDirection: 'column', gap: 12,
-              direction: 'rtl', padding: '24px 28px',
-            }}>
+            <div role="log"
+              aria-live="polite"
+              aria-relevant="additions"
+              aria-label="שיחת דמו עם פיבוט"
+              style={{
+                flex: 1, display: 'flex', flexDirection: 'column', gap: 12,
+                direction: 'rtl', padding: '24px 28px',
+              }}>
               {thread.map((m, i) => (
                 <div key={i} style={{
                   display: 'flex',
@@ -1442,7 +1452,7 @@ function TalkToInventory() {
                   }}>
                     {[0, 1, 2].map((d) => (
                       <span key={d} className="pivot-pulse-dot" style={{
-                        width: 6, height: 6, borderRadius: 999, background: '#8C8C8C',
+                        width: 6, height: 6, borderRadius: 999, background: '#6F6F6F',
                         animationDelay: `${d * 0.2}s`,
                       }} />
                     ))}
@@ -1457,7 +1467,7 @@ function TalkToInventory() {
               fontSize: 11, color: 'rgba(255,255,255,0.4)', textAlign: 'center',
               fontFamily: 'Rubik, sans-serif', letterSpacing: '0.05em',
             }}>
-              ← לחצו על שאלה כדי להמשיך את הדמו
+              <span aria-hidden="true">← </span>לחצו על שאלה כדי להמשיך את הדמו
             </div>
           </div>
           </div>
@@ -1511,7 +1521,7 @@ function InsuranceTagline() {
         </p>
         <div style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap' }}>
           <a className="pivot-btn pivot-btn-blue"
-            href="https://wa.me/97283761057"
+            href="https://wa.me/972506704488"
             target="_blank" rel="noopener noreferrer"
             style={{ height: 64, fontSize: 17 }}>
             <span style={{ width: 10, height: 10, borderRadius: 999, background: '#25D366', boxShadow: '0 0 0 3px rgba(37,211,102,0.32)' }} />
@@ -1584,7 +1594,7 @@ function Advantages() {
 // ============================================================
 function WhatsAppReviews() {
   const messages = [
-    { author: 'אביב זנו', role: 'בעלים', avatar: 'א', side: 'right', text: 'אחרי חצי שנה עם פיבוט שמתי לב שאני כמעט לא מדבר עם מנהל המטבח על הזמנות. הכל מתועד, הספקים מקבלים את מה שצריך, והזמן שהתפנה הולך לשיפור תהליכים אחרים במסעדה.', time: 'לפני שבועיים', stars: 5, featured: true },
+    { author: 'אביב', role: 'בעלים', avatar: 'א', side: 'right', text: 'אחרי חצי שנה עם פיבוט שמתי לב שאני כמעט לא מדבר עם מנהל המטבח על הזמנות. הכל מתועד, הספקים מקבלים את מה שצריך, והזמן שהתפנה הולך לשיפור תהליכים אחרים במסעדה.', time: 'לפני שבועיים', stars: 5, featured: true },
     { author: 'אנסטסיה', role: 'מנהלת מטבח', avatar: 'א', side: 'left', text: 'פיבוט הורידה ממני את הלחץ של סוף משמרת — אני רואה מה חסר, שולחת הזמנה מסודרת וממשיכה לעבוד.', time: 'אתמול', stars: 5 },
     { author: 'דור', role: 'יועץ עסקי', avatar: 'ד', side: 'right', text: 'הכוח של פיבוט הוא שהיא לא משנה למסעדה את ההרגלים — היא פשוט עושה סדר במקום שהכי כואב.', time: 'לפני 4 ימים', stars: 5 },
     { author: 'תומר', role: 'בעלים', avatar: 'ת', side: 'left', text: 'מאז שפיבוט נכנסה, יש פחות שאלות, פחות טלפונים והרבה יותר שקט סביב ההזמנות.', time: 'לפני שבוע', stars: 5 },
@@ -1602,7 +1612,7 @@ function WhatsAppReviews() {
           <div style={{ flex: 1, height: 1, background: '#E8E8E8' }} />
           <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
             <div style={{ display: 'flex', fontSize: 18, color: '#1A2BFB' }}>★★★★★</div>
-            <div style={{ fontSize: 13, color: '#8C8C8C' }}>4.9 · 187 ביקורות מאומתות</div>
+            <div style={{ fontSize: 13, color: '#6F6F6F' }}>4.9 · 187 ביקורות מאומתות</div>
           </div>
         </div>
         <h2 className="pivot-h2" style={{ marginBottom: 56, maxWidth: 900 }}>
@@ -1631,12 +1641,12 @@ function WhatsAppReviews() {
             }} />
             <div style={{ flex: 1 }}>
               <div style={{ fontWeight: 800, fontSize: 18 }}>קבוצת לקוחות Pivot</div>
-              <div style={{ fontSize: 13, color: '#8C8C8C', display: 'flex', alignItems: 'center', gap: 6 }}>
+              <div style={{ fontSize: 13, color: '#6F6F6F', display: 'flex', alignItems: 'center', gap: 6 }}>
                 <span className="pivot-pulse-dot" style={{ width: 8, height: 8, borderRadius: 999, background: '#1A2BFB' }} />
                 240+ חברים · פעיל כעת
               </div>
             </div>
-            <div style={{ fontSize: 14, fontWeight: 700, color: '#1A2BFB' }}>הצטרפו →</div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: '#1A2BFB' }}>הצטרפו <span aria-hidden="true">→</span></div>
           </div>
 
           {/* Messages */}
@@ -1670,7 +1680,7 @@ function ReviewBubble({ author, role, avatar, side, text, time, stars, featured 
       <div style={{ maxWidth: '78%', display: 'flex', flexDirection: 'column', gap: 6 }}>
         <div style={{
           display: 'flex', alignItems: 'center', gap: 8,
-          fontSize: 12, color: '#8C8C8C',
+          fontSize: 12, color: '#6F6F6F',
           justifyContent: isRight ? 'flex-start' : 'flex-end',
         }}>
           <span style={{ fontWeight: 700, color: '#000' }}>{author}</span>
@@ -1694,7 +1704,7 @@ function ReviewBubble({ author, role, avatar, side, text, time, stars, featured 
         </div>
         <div style={{
           display: 'flex', alignItems: 'center', gap: 8,
-          fontSize: 11, color: '#8C8C8C',
+          fontSize: 11, color: '#6F6F6F',
           justifyContent: isRight ? 'flex-start' : 'flex-end',
         }}>
           <span style={{ color: '#1A2BFB', fontSize: 12 }}>{'★'.repeat(stars)}</span>
@@ -1763,7 +1773,6 @@ function Waitlist({ blue }) {
             </p>
             <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
               <BulletItem t="הקמה ב-48 שעות" />
-              <BulletItem t="ללא כרטיס אשראי" />
               <BulletItem t="ביטול בלחיצה" />
               <BulletItem t="תמיכה בעברית 24/6" />
             </div>
@@ -1773,11 +1782,18 @@ function Waitlist({ blue }) {
             padding: 'clamp(22px, 6vw, 40px)', borderRadius: 24,
             boxShadow: '0 40px 80px -20px rgba(0,0,0,0.3)',
           }}>
-            <div style={{ fontSize: 13, fontWeight: 700, color: '#8C8C8C', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 14 }}>
+            <label htmlFor="waitlist-email" style={{
+              display: 'block',
+              fontSize: 13, fontWeight: 700, color: '#6F6F6F',
+              letterSpacing: '0.08em', textTransform: 'uppercase',
+              marginBottom: 14,
+            }}>
               כתובת אימייל
-            </div>
+            </label>
             <input
+              id="waitlist-email"
               type="email"
+              autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="manager@my-restaurant.co.il"
@@ -1794,11 +1810,11 @@ function Waitlist({ blue }) {
             }}
             onClick={() => {
               const msg = `שלום, אשמח לקבל גישה ל-Pivot Level.\nאימייל: ${email || '(לא צויין)'}`;
-              window.open(`https://wa.me/97283761057?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
+              window.open(`https://wa.me/972506704488?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
             }}>
-              קבלו גישה עכשיו →
+              קבלו גישה עכשיו <span aria-hidden="true">→</span>
             </button>
-            <div style={{ fontSize: 12, color: '#8C8C8C', marginTop: 16, textAlign: 'center' }}>
+            <div style={{ fontSize: 12, color: '#6F6F6F', marginTop: 16, textAlign: 'center' }}>
               ממוצע גישה מאושרת: <b style={{ color: '#000' }}>14 דקות</b>
             </div>
           </div>
@@ -1828,8 +1844,8 @@ function Footer() {
   const isMobile = useIsMobile();
   const cols = [
     { title: 'מוצר', items: ['תכונות', 'איך זה עובד', 'מחירים'] },
-    { title: 'חברה', items: ['אודות', 'הצוות', 'דרושים', 'יצירת קשר'] },
-    { title: 'משפטי', items: ['תנאי שימוש', 'מדיניות פרטיות', 'אבטחה', 'GDPR', 'עוגיות'] },
+    { title: 'חברה', items: ['אודות', 'יצירת קשר'] },
+    { title: 'משפטי', items: ['תנאי שימוש', 'מדיניות פרטיות', 'נגישות', 'אבטחה', 'GDPR', 'עוגיות'] },
   ];
   return (
     <footer style={{ background: '#000', color: '#fff' }}>
@@ -1844,13 +1860,15 @@ function Footer() {
               ניהול ספקים למסעדות. ישירות מהוואטסאפ.
             </p>
             <div style={{ display: 'flex', gap: 10, marginTop: 24 }}>
-              {['X', 'IG', 'in', 'YT'].map((s, i) => (
-                <div key={i} className="pivot-footer-social" style={{
+              <a className="pivot-footer-social"
+                href="https://www.instagram.com/pivot.level?igsh=a3N3NGVrOGI1azd4"
+                target="_blank" rel="noopener noreferrer"
+                aria-label="Pivot Level באינסטגרם"
+                style={{
                   width: 36, height: 36, borderRadius: 999,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   fontSize: 12, fontWeight: 700, fontFamily: 'Rubik, sans-serif',
-                }}>{s}</div>
-              ))}
+                }}><span aria-hidden="true">IG</span></a>
             </div>
           </div>
           {cols.map((c, i) => (
@@ -1869,9 +1887,10 @@ function Footer() {
                   }
                   if (act && act.scrollTo) {
                     return (
-                      <span key={j} className="pivot-footer-link" onClick={() => scrollToId(act.scrollTo)}>
+                      <button key={j} type="button" className="pivot-footer-link"
+                        onClick={() => scrollToId(act.scrollTo)}>
                         {it}
-                      </span>
+                      </button>
                     );
                   }
                   return <span key={j} className="pivot-footer-link">{it}</span>;

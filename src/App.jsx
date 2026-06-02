@@ -1,7 +1,13 @@
 import React from 'react';
 import { LandingWeb } from './Landing.jsx';
+import { A11yWidget } from './a11y/A11yWidget.jsx';
 
 // Single responsive landing page. The accent color is the Pivot brand blue.
 export function App() {
-  return <LandingWeb tweaks={{ accent: '#1A2BFB' }} />;
+  return (
+    <>
+      <LandingWeb tweaks={{ accent: '#1A2BFB' }} />
+      <A11yWidget />
+    </>
+  );
 }

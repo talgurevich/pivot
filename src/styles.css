@@ -1,5 +1,67 @@
 /* Pivot Level — design system tokens */
 
+/* ============================================================
+   ACCESSIBILITY — skip link + focus-visible (IS 5568 §2.4.1, §2.4.7)
+   ============================================================ */
+
+/* Skip-to-content link — first focusable element in the document.
+   Hidden off-screen with RTL-aware positioning; revealed on focus. */
+.pivot-skip-link {
+  position: absolute;
+  inset-inline-start: -9999px;
+  top: 0;
+  background: #1A2BFB;
+  color: #fff;
+  padding: 12px 18px;
+  font-family: 'Heebo', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 0 0 8px 8px;
+  z-index: 9999;
+}
+.pivot-skip-link:focus {
+  inset-inline-start: 8px;
+  top: 8px;
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Visible focus rings for keyboard navigation.
+   `:focus-visible` keeps the ring out of mouse-click states. */
+.pivot a:focus-visible,
+.pivot button:focus-visible,
+.pivot input:focus-visible,
+.pivot textarea:focus-visible,
+.pivot select:focus-visible {
+  outline: 3px solid #1A2BFB;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.pivot .pivot-btn:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px #1A2BFB;
+}
+.pivot .pivot-btn-blue:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px #000;
+}
+
+/* Reduced-motion catch-all — for any animation not explicitly handled
+   elsewhere (chat-bubble pivot-rise, pulse dots, logo coin flip, marquees,
+   page transitions). IS 5568 / WCAG 2.3.3. Existing per-keyframe blocks
+   below this rule are still respected. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* Base reset + page background */
 html, body { margin: 0; padding: 0; }
 html { background: #f0eee9; }
@@ -18,7 +80,7 @@ body {
   --blue-100: #E8EAFF;
   --white: #FFFFFF;
   --black: #000000;
-  --gray: #8C8C8C;
+  --gray: #6F6F6F;
   --gray-dark: #4A4A4A;
   --gray-light: #E8E8E8;
   --gray-bg: #F5F5F5;

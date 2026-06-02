@@ -119,9 +119,9 @@ function ChatMockup({ scale = 1 }) {
           }}>P</div>
           <div style={{ flex: 1 }}>
             <div style={{ fontWeight: 700, fontSize: 15 }}>ירקות השדה · ספק</div>
-            <div style={{ fontSize: 11, color: '#8C8C8C' }}>דרך Pivot · מקוון</div>
+            <div style={{ fontSize: 11, color: '#6F6F6F' }}>דרך Pivot · מקוון</div>
           </div>
-          <div style={{ color: '#8C8C8C', fontSize: 20 }}>⋮</div>
+          <div style={{ color: '#6F6F6F', fontSize: 20 }}>⋮</div>
         </div>
         {/* Messages */}
         <div style={{
@@ -175,7 +175,7 @@ function ChatMockup({ scale = 1 }) {
             flex: 1, height: 38, borderRadius: 19,
             background: '#F5F5F5',
             display: 'flex', alignItems: 'center', padding: '0 14px',
-            fontSize: 13, color: '#8C8C8C',
+            fontSize: 13, color: '#6F6F6F',
           }}>הקלידו הודעה...</div>
           <div style={{
             width: 38, height: 38, borderRadius: 999,
@@ -194,10 +194,10 @@ function DashboardOrders({ width = 760, height = 480 }) {
   const rows = [
     { id: '#4821', supplier: 'ספק ירקות', status: 'נשלח', statusColor: '#1A2BFB', amount: '322.80', items: 2, eta: 'מחר 06:00' },
     { id: '#4820', supplier: 'ספק בשר', status: 'אושר', statusColor: '#000', amount: '1,840.00', items: 7, eta: 'היום 14:00' },
-    { id: '#4819', supplier: 'ספק מאפים', status: 'התקבל', statusColor: '#8C8C8C', amount: '264.50', items: 4, eta: '—' },
+    { id: '#4819', supplier: 'ספק מאפים', status: 'התקבל', statusColor: '#6F6F6F', amount: '264.50', items: 4, eta: '—' },
     { id: '#4818', supplier: 'ספק דגים', status: 'נשלח', statusColor: '#1A2BFB', amount: '780.00', items: 3, eta: 'מחר 05:30' },
     { id: '#4817', supplier: 'ספק יין', status: 'אושר', statusColor: '#000', amount: '2,150.00', items: 12, eta: 'יום ה׳ 10:00' },
-    { id: '#4816', supplier: 'ספק חלב', status: 'התקבל', statusColor: '#8C8C8C', amount: '512.30', items: 5, eta: '—' },
+    { id: '#4816', supplier: 'ספק חלב', status: 'התקבל', statusColor: '#6F6F6F', amount: '512.30', items: 5, eta: '—' },
   ];
   return (
     <div style={{
@@ -217,12 +217,12 @@ function DashboardOrders({ width = 760, height = 480 }) {
         direction: 'ltr',
       }}>
         <div style={{ display: 'flex', gap: 6 }}>
-          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#8C8C8C' }} />
-          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#8C8C8C' }} />
-          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#8C8C8C' }} />
+          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#6F6F6F' }} />
+          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#6F6F6F' }} />
+          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#6F6F6F' }} />
         </div>
         <div style={{
-          flex: 1, textAlign: 'center', fontSize: 11, color: '#8C8C8C',
+          flex: 1, textAlign: 'center', fontSize: 11, color: '#6F6F6F',
           fontFamily: 'Rubik, monospace', letterSpacing: '0.04em',
         }}>app.pivotlevel.co — הזמנות</div>
       </div>
@@ -266,7 +266,7 @@ function DashboardOrders({ width = 760, height = 480 }) {
             marginBottom: 20,
           }}>
             <div>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: '#8C8C8C', textTransform: 'uppercase' }}>היום</div>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: '#6F6F6F', textTransform: 'uppercase' }}>היום</div>
               <div style={{ fontSize: 26, fontWeight: 900, letterSpacing: '-0.02em' }}>12 הזמנות פעילות</div>
             </div>
             <div style={{
@@ -283,7 +283,7 @@ function DashboardOrders({ width = 760, height = 480 }) {
             gridTemplateColumns: '70px 1fr 90px 100px 110px 30px',
             gap: 12,
             padding: '10px 0', borderBottom: '1px solid #E8E8E8',
-            fontSize: 10, fontWeight: 700, color: '#8C8C8C',
+            fontSize: 10, fontWeight: 700, color: '#6F6F6F',
             letterSpacing: '0.08em', textTransform: 'uppercase',
           }}>
             <div>מס׳</div>
@@ -301,18 +301,18 @@ function DashboardOrders({ width = 760, height = 480 }) {
               padding: '12px 0', borderBottom: '1px solid #E8E8E8',
               fontSize: 13,
             }}>
-              <div style={{ fontFamily: 'Rubik, monospace', fontWeight: 600, color: '#8C8C8C' }}>{r.id}</div>
+              <div style={{ fontFamily: 'Rubik, monospace', fontWeight: 600, color: '#6F6F6F' }}>{r.id}</div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <div style={{ width: 6, height: 6, borderRadius: 999, background: r.statusColor }} />
                 <div>
                   <div style={{ fontWeight: 700 }}>{r.supplier}</div>
-                  <div style={{ fontSize: 11, color: '#8C8C8C' }}>{r.status}</div>
+                  <div style={{ fontSize: 11, color: '#6F6F6F' }}>{r.status}</div>
                 </div>
               </div>
               <div style={{ color: '#000' }}>{r.items} פריטים</div>
               <div style={{ fontWeight: 700, fontFamily: 'Rubik, sans-serif' }}>₪{r.amount}</div>
               <div style={{ fontSize: 12, color: '#000' }}>{r.eta}</div>
-              <div style={{ color: '#8C8C8C' }}>›</div>
+              <div style={{ color: '#6F6F6F' }}>›</div>
             </div>
           ))}
         </div>
@@ -348,19 +348,19 @@ function SuppliersScreen({ width = 760, height = 480 }) {
         borderBottom: '1px solid #E8E8E8', direction: 'ltr',
       }}>
         <div style={{ display: 'flex', gap: 6 }}>
-          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#8C8C8C' }} />
-          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#8C8C8C' }} />
-          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#8C8C8C' }} />
+          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#6F6F6F' }} />
+          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#6F6F6F' }} />
+          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#6F6F6F' }} />
         </div>
         <div style={{
-          flex: 1, textAlign: 'center', fontSize: 11, color: '#8C8C8C',
+          flex: 1, textAlign: 'center', fontSize: 11, color: '#6F6F6F',
           fontFamily: 'Rubik, monospace',
         }}>app.pivotlevel.co — ספקים</div>
       </div>
       <div style={{ padding: '28px 32px', flex: 1 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 20 }}>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: '#8C8C8C', textTransform: 'uppercase' }}>הספרייה שלי</div>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: '#6F6F6F', textTransform: 'uppercase' }}>הספרייה שלי</div>
             <div style={{ fontSize: 26, fontWeight: 900, letterSpacing: '-0.02em' }}>34 ספקים פעילים</div>
           </div>
           <div style={{
@@ -395,10 +395,10 @@ function SuppliersScreen({ width = 760, height = 480 }) {
                 fontWeight: 900, fontSize: 14,
               }}>{c.name[0]}</div>
               <div style={{ fontWeight: 700, fontSize: 14, letterSpacing: '-0.01em' }}>{c.name}</div>
-              <div style={{ fontSize: 11, color: '#8C8C8C' }}>{c.cat}</div>
+              <div style={{ fontSize: 11, color: '#6F6F6F' }}>{c.cat}</div>
               <div style={{
                 display: 'flex', gap: 12, marginTop: 4,
-                fontSize: 11, color: '#8C8C8C',
+                fontSize: 11, color: '#6F6F6F',
               }}>
                 <span><b style={{ color: '#000', fontWeight: 700 }}>{c.orders}</b> הזמנות</span>
                 <span>תגובה ~{c.avg}</span>
@@ -440,19 +440,19 @@ function InvoicesScreen({ width = 760, height = 480 }) {
         borderBottom: '1px solid #E8E8E8', direction: 'ltr',
       }}>
         <div style={{ display: 'flex', gap: 6 }}>
-          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#8C8C8C' }} />
-          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#8C8C8C' }} />
-          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#8C8C8C' }} />
+          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#6F6F6F' }} />
+          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#6F6F6F' }} />
+          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#6F6F6F' }} />
         </div>
         <div style={{
-          flex: 1, textAlign: 'center', fontSize: 11, color: '#8C8C8C',
+          flex: 1, textAlign: 'center', fontSize: 11, color: '#6F6F6F',
           fontFamily: 'Rubik, monospace',
         }}>app.pivotlevel.co — חשבוניות</div>
       </div>
       <div style={{ padding: '28px 32px', flex: 1, display: 'flex', flexDirection: 'column' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 20 }}>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: '#8C8C8C', textTransform: 'uppercase' }}>חודש זה</div>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: '#6F6F6F', textTransform: 'uppercase' }}>חודש זה</div>
             <div style={{ display: 'flex', gap: 16, alignItems: 'baseline' }}>
               <div style={{ fontSize: 36, fontWeight: 900, letterSpacing: '-0.025em' }}>₪48,210</div>
               <div style={{
@@ -495,7 +495,7 @@ function InvoicesScreen({ width = 760, height = 480 }) {
                   }}>₪{d.val}k</div>
                 )}
               </div>
-              <div style={{ fontSize: 11, fontWeight: 600, color: '#8C8C8C', direction: 'rtl' }}>{d.m}</div>
+              <div style={{ fontSize: 11, fontWeight: 600, color: '#6F6F6F', direction: 'rtl' }}>{d.m}</div>
             </div>
           ))}
         </div>
@@ -513,7 +513,7 @@ function NotificationsScreen({ width = 760, height = 480 }) {
     { kind: 'price', title: 'מחיר חדש משופר', body: 'גבינות בוטיק — חלת בור פטה זול ב-14% מהרגיל.', time: 'אתמול 17:32', cta: 'הוסיפו לעגלה' },
   ];
   const iconFor = (k) => k === 'urgent' ? '!' : k === 'price' ? '₪' : '✓';
-  const colorFor = (k) => k === 'urgent' ? '#1A2BFB' : k === 'price' ? '#000' : '#8C8C8C';
+  const colorFor = (k) => k === 'urgent' ? '#1A2BFB' : k === 'price' ? '#000' : '#6F6F6F';
   return (
     <div style={{
       width, height,
@@ -530,22 +530,22 @@ function NotificationsScreen({ width = 760, height = 480 }) {
         borderBottom: '1px solid #E8E8E8', direction: 'ltr',
       }}>
         <div style={{ display: 'flex', gap: 6 }}>
-          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#8C8C8C' }} />
-          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#8C8C8C' }} />
-          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#8C8C8C' }} />
+          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#6F6F6F' }} />
+          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#6F6F6F' }} />
+          <div style={{ width: 10, height: 10, borderRadius: 999, background: '#6F6F6F' }} />
         </div>
         <div style={{
-          flex: 1, textAlign: 'center', fontSize: 11, color: '#8C8C8C',
+          flex: 1, textAlign: 'center', fontSize: 11, color: '#6F6F6F',
           fontFamily: 'Rubik, monospace',
         }}>app.pivotlevel.co — התראות</div>
       </div>
       <div style={{ padding: '28px 32px', flex: 1, display: 'flex', flexDirection: 'column', gap: 10 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 10 }}>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: '#8C8C8C', textTransform: 'uppercase' }}>חי</div>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: '#6F6F6F', textTransform: 'uppercase' }}>חי</div>
             <div style={{ fontSize: 26, fontWeight: 900, letterSpacing: '-0.02em' }}>התראות חכמות</div>
           </div>
-          <div style={{ fontSize: 12, color: '#8C8C8C' }}>סימן הכל כנקרא</div>
+          <div style={{ fontSize: 12, color: '#6F6F6F' }}>סימן הכל כנקרא</div>
         </div>
         {notes.map((n, i) => (
           <div key={i} style={{
@@ -563,7 +563,7 @@ function NotificationsScreen({ width = 760, height = 480 }) {
             <div style={{ flex: 1 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                 <div style={{ fontWeight: 700, fontSize: 14, letterSpacing: '-0.01em' }}>{n.title}</div>
-                <div style={{ fontSize: 11, color: '#8C8C8C' }}>{n.time}</div>
+                <div style={{ fontSize: 11, color: '#6F6F6F' }}>{n.time}</div>
               </div>
               <div style={{ fontSize: 12.5, color: '#4A4A4A', marginTop: 3, lineHeight: 1.45 }}>{n.body}</div>
               {n.cta && (
@@ -880,7 +880,7 @@ function ChatMockupCompact({ scene = 'bakery', scale = 1 }) {
           }}>{s.avatar}</div>
           <div style={{ flex: 1 }}>
             <div style={{ fontWeight: 700, fontSize: 13 }}>{s.name}</div>
-            <div style={{ fontSize: 10, color: '#8C8C8C' }}>דרך Pivot · מקוון</div>
+            <div style={{ fontSize: 10, color: '#6F6F6F' }}>דרך Pivot · מקוון</div>
           </div>
         </div>
         <div style={{
@@ -911,7 +911,7 @@ function ChatMockupCompact({ scene = 'bakery', scale = 1 }) {
               width: 6, height: 6, borderRadius: 999, background: '#1A2BFB',
             }} />
             <span style={{ fontFamily: 'Rubik, monospace' }}>הזמנה {s.tag}</span>
-            <span style={{ color: '#8C8C8C', flex: 1, textAlign: 'left' }}>נשמר ✓</span>
+            <span style={{ color: '#6F6F6F', flex: 1, textAlign: 'left' }}>נשמר ✓</span>
           </div>
         </div>
       </div>
@@ -1038,7 +1038,7 @@ function CommandPanel({ showFloats = true }) {
                 fontFamily: 'Rubik, sans-serif', letterSpacing: '0.06em',
               }}>BETA</span>
             </div>
-            <div style={{ fontSize: 12, color: '#8C8C8C', display: 'flex', alignItems: 'center', gap: 6, marginTop: 2 }}>
+            <div style={{ fontSize: 12, color: '#6F6F6F', display: 'flex', alignItems: 'center', gap: 6, marginTop: 2 }}>
               עונה תוך 2 שניות · 240+ מסעדות פעילות
             </div>
           </div>
@@ -1088,7 +1088,7 @@ function CommandPanel({ showFloats = true }) {
             }}>
               {[0, 1, 2].map((d) => (
                 <span key={d} className="pivot-pulse-dot" style={{
-                  width: 8, height: 8, borderRadius: 999, background: '#8C8C8C',
+                  width: 8, height: 8, borderRadius: 999, background: '#6F6F6F',
                   animationDelay: `${d * 0.2}s`,
                 }} />
               ))}
@@ -1150,13 +1150,13 @@ function CommandPanel({ showFloats = true }) {
 function FloatCard({ sticker, stickerColor = '#1A2BFB', tone = 'white', eyebrow, title, rows, style }) {
   const palettes = {
     white: {
-      bg: '#fff', fg: '#000', muted: '#8C8C8C', accent: '#1A2BFB',
+      bg: '#fff', fg: '#000', muted: '#6F6F6F', accent: '#1A2BFB',
       border: '1px solid rgba(0,0,0,0.05)',
       shadow: '0 30px 60px -15px rgba(0,0,0,0.35), 0 8px 24px -8px rgba(0,0,0,0.2)',
       backdrop: 'none',
     },
     'glass-light': {
-      bg: 'rgba(255,255,255,0.92)', fg: '#000', muted: '#8C8C8C', accent: '#1A2BFB',
+      bg: 'rgba(255,255,255,0.92)', fg: '#000', muted: '#6F6F6F', accent: '#1A2BFB',
       border: '1px solid rgba(255,255,255,0.6)',
       shadow: '0 30px 60px -15px rgba(0,0,0,0.4), 0 8px 24px -8px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.5)',
       backdrop: 'blur(20px) saturate(140%)',

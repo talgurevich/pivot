@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>הצהרת נגישות — Pivot Level</title>
+  <meta name="description" content="הצהרת הנגישות של Pivot Level — האתר עומד בתקן הישראלי IS 5568 ברמה AA, ומיועד להיות נגיש לכלל המשתמשים." />
+  <link rel="icon" type="image/jpeg" href="./assets/pivot-logo.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Rubik:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --blue:#1A2BFB; --ink:#000; --muted:#555; --line:#e8e8e8; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: #fff; }
+    body {
+      font-family: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
+      direction: rtl; color: var(--ink);
+      line-height: 1.65; font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: var(--blue); }
+    a:focus-visible, button:focus-visible {
+      outline: 3px solid var(--blue);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    .skip-link {
+      position: absolute;
+      inset-inline-start: -9999px;
+      top: 0;
+      background: var(--blue);
+      color: #fff;
+      padding: 12px 18px;
+      font-weight: 700;
+      text-decoration: none;
+      z-index: 100;
+    }
+    .skip-link:focus {
+      inset-inline-start: 8px;
+      top: 8px;
+    }
+    header.site {
+      padding: 22px clamp(20px, 5vw, 56px);
+      border-bottom: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      position: sticky; top: 0; background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
+    .brand img { width: 36px; height: 36px; border-radius: 50%; display: block; box-shadow: 0 0 0 2px #fff, 0 6px 14px -4px rgba(0,0,0,0.2); }
+    .brand b { font-weight: 900; font-size: 17px; letter-spacing: -0.02em; }
+    .back { color: var(--blue); text-decoration: none; font-weight: 700; font-size: 14px; }
+    .back:hover { text-decoration: underline; }
+    main { max-width: 760px; margin: 0 auto; padding: clamp(48px, 8vw, 88px) clamp(20px, 5vw, 56px) 80px; }
+    h1 { font-size: clamp(36px, 6vw, 60px); font-weight: 900; letter-spacing: -0.03em; line-height: 1.04; margin-bottom: 14px; }
+    h1 span { color: var(--blue); }
+    .lede { color: var(--muted); font-size: 17px; line-height: 1.55; margin-bottom: 14px; max-width: 640px; }
+    .effective {
+      color: var(--muted); font-size: 12px; margin-bottom: 44px;
+      font-family: 'Rubik', sans-serif; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    h2 {
+      font-size: 22px; font-weight: 800; letter-spacing: -0.015em;
+      margin: 40px 0 14px; line-height: 1.25;
+      scroll-margin-top: 80px;
+    }
+    h2 .num {
+      color: var(--blue); font-family: 'Rubik', sans-serif; font-weight: 700;
+      margin-left: 8px;
+    }
+    p { color: #222; font-size: 16px; line-height: 1.75; margin-bottom: 14px; }
+    ul, ol { padding-right: 22px; margin-bottom: 14px; }
+    li { color: #222; font-size: 16px; line-height: 1.75; margin-bottom: 6px; }
+    strong { font-weight: 700; }
+    .contact-card {
+      margin: 24px 0; padding: 22px 24px; border-radius: 16px;
+      background: #f4f5ff; border: 1px solid #e1e3ff;
+    }
+    .contact-card h3 {
+      font-size: 16px; font-weight: 800; margin-bottom: 10px;
+      color: var(--ink);
+    }
+    .contact-card p { font-size: 15px; margin-bottom: 4px; }
+    .ltr { direction: ltr; unicode-bidi: isolate; display: inline-block; }
+    .note {
+      margin: 36px 0; padding: 16px 18px; border-radius: 14px;
+      background: #fff7e6; border: 1px solid #ffe7b3; color: #1a1a1a;
+      font-size: 14.5px;
+    }
+    footer.site {
+      border-top: 1px solid var(--line);
+      padding: 28px clamp(20px, 5vw, 56px);
+      text-align: center; color: var(--muted); font-size: 13px;
+      line-height: 1.7;
+    }
+    footer.site a { color: var(--ink); font-weight: 700; text-decoration: none; }
+    footer.site a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">דלג לתוכן הראשי</a>
+
+  <header class="site">
+    <a class="brand" href="./" aria-label="חזרה לאתר Pivot Level">
+      <img src="./assets/pivot-logo.jpg" alt="Pivot Level" />
+      <b>Pivot Level</b>
+    </a>
+    <a class="back" href="./">← חזרה לאתר</a>
+  </header>
+
+  <main id="main-content">
+    <h1>הצהרת <span>נגישות</span></h1>
+    <p class="lede">אנו ב-Pivot Level רואים בנגישות האתר ערך מרכזי, ופועלים להנגיש את השירות לכלל המשתמשים, לרבות אנשים עם מוגבלות. האתר נבנה בהתאם לתקן הישראלי IS 5568:2020 ולהנחיות WCAG 2.1 ברמה AA.</p>
+    <p class="effective">בתוקף מתאריך 2 ביוני 2026</p>
+
+    <h2><span class="num">01</span>הצהרה כללית</h2>
+    <p>חברת Pivot Level Ltd. מחויבת להנגיש את האתר ואת השירות לכלל הציבור, בהתאם לחוק שוויון זכויות לאנשים עם מוגבלות, התשנ"ח-1998, ולתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע"ג-2013. רמת הנגישות של האתר הינה <strong>AA</strong> בהתאם לתקן הישראלי IS 5568:2020 התואם להנחיות WCAG 2.1.</p>
+
+    <h2><span class="num">02</span>אמצעי הנגישות באתר</h2>
+    <ul>
+      <li><strong>תמיכה בקוראי מסך:</strong> האתר נבדק עם קוראי מסך מקובלים בישראל — NVDA (Windows), JAWS (Windows), VoiceOver (macOS / iOS) ו-TalkBack (Android).</li>
+      <li><strong>ניווט במקלדת:</strong> ניתן לגלוש באתר באמצעות מקלדת בלבד, באמצעות מקש Tab למעבר בין רכיבים ו-Enter / Space להפעלה.</li>
+      <li><strong>קישור לדילוג לתוכן:</strong> "דלג לתוכן הראשי" מופיע כקישור ראשון במסמך לטובת משתמשי מקלדת וקוראי מסך.</li>
+      <li><strong>טקסט חלופי לתמונות:</strong> תמונות תוכן מלוות בטקסט חלופי מתאים. תמונות עיטוריות מסומנות כדי שקוראי המסך ידלגו עליהן.</li>
+      <li><strong>היררכיית כותרות:</strong> מבנה הכותרות (H1 → H2 → H3) שומר על סדר היררכי המאפשר ניווט בקוראי מסך.</li>
+      <li><strong>תוויות לטפסים:</strong> כל שדה טופס מקושר לתווית מתאימה בעברית.</li>
+      <li><strong>ניגודיות צבעים:</strong> הניגודיות בין טקסט לרקע עומדת ביחס של 4.5:1 לפחות לטקסט רגיל.</li>
+      <li><strong>תמיכה ב-RTL:</strong> האתר מוצהר כעברית (lang="he") ובכיוון מימין לשמאל (dir="rtl") לצורך תצוגה נכונה בקוראי מסך וביישומי עזר.</li>
+      <li><strong>שמות נגישים בעברית:</strong> תוויות ARIA, כפתורים וקישורים מנוסחים בעברית.</li>
+    </ul>
+
+    <h2><span class="num">03</span>אופן הניווט באתר במקלדת</h2>
+    <ul>
+      <li><strong>Tab</strong> — מעבר לאלמנט הבא.</li>
+      <li><strong>Shift + Tab</strong> — חזרה לאלמנט הקודם.</li>
+      <li><strong>Enter</strong> — הפעלת קישורים וכפתורים.</li>
+      <li><strong>Space</strong> — הפעלת כפתורים, גלילה כלפי מטה.</li>
+      <li><strong>Esc</strong> — סגירת חלוניות וחלונות צפים.</li>
+    </ul>
+
+    <h2><span class="num">04</span>חלקים שטרם הונגשו במלואם</h2>
+    <p>למרות מאמצינו להנגיש את האתר במלואו, ייתכן כי קיימים חלקים או תוכן שטרם הונגשו, או שהונגשו באופן חלקי:</p>
+    <ul>
+      <li>תוכן וידאו או דמואים אינטראקטיביים שטרם קיבלו כתוביות / תיאור קולי.</li>
+      <li>תוכן שצד שלישי מטמיע באתר (לדוגמה: ווידג'טים חיצוניים, קודי מעקב) — עשוי שלא לעמוד באותה רמת נגישות.</li>
+      <li>תכנים גרפיים מורכבים כגון אנימציות שיווקיות, תוויות נייר ("סטיקרים") ועיטורים — מסומנים כעיטור (aria-hidden) ואינם נדרשים להבנת התוכן.</li>
+    </ul>
+    <p>אנו ממשיכים לעבוד על שיפור הנגישות באופן שוטף.</p>
+
+    <h2><span class="num">05</span>דווחו לנו על בעיית נגישות</h2>
+    <p>אם נתקלתם בקושי, שגיאת נגישות או חוסר עמידה בתקן בעת השימוש באתר, אנא פנו אלינו. נשמח לטפל בפנייה בהקדם האפשרי. בעת הפנייה אנא ציינו:</p>
+    <ul>
+      <li>תיאור הקושי או הבעיה שנתקלתם בה.</li>
+      <li>הקישור (URL) של העמוד שבו אירעה הבעיה.</li>
+      <li>סוג המכשיר, מערכת ההפעלה והדפדפן בהם השתמשתם.</li>
+      <li>קורא המסך או טכנולוגיית העזר (אם נעשה שימוש כזה).</li>
+    </ul>
+
+    <h2 id="contact"><span class="num">06</span>פרטי רכז הנגישות</h2>
+    <div class="contact-card">
+      <h3>רכז נגישות — Pivot Level</h3>
+      <p><strong>שם:</strong> טל גורביץ'</p>
+      <p><strong>דוא"ל:</strong> <a href="mailto:accessibility@pivott.digital">accessibility@pivott.digital</a></p>
+      <p><strong>WhatsApp:</strong> <a href="https://wa.me/972506704488" target="_blank" rel="noopener">
+        <span class="ltr">050-670-4488</span>
+      </a></p>
+      <p><strong>זמן מענה:</strong> עד 14 ימי עסקים מקבלת הפנייה.</p>
+    </div>
+
+    <h2><span class="num">07</span>פנייה לנציבות שוויון זכויות לאנשים עם מוגבלות</h2>
+    <p>במידה שלא נמצא מענה הולם לפנייתכם, ניתן לפנות אל נציבות שוויון זכויות לאנשים עם מוגבלות במשרד המשפטים:</p>
+    <ul>
+      <li>אתר הנציבות: <a href="https://www.gov.il/he/departments/moj_disability_rights/govil-landing-page" target="_blank" rel="noopener">gov.il — נציבות שוויון זכויות לאנשים עם מוגבלות</a></li>
+      <li>טלפון: <span class="ltr">*5901</span></li>
+    </ul>
+
+    <h2><span class="num">08</span>עדכון ההצהרה</h2>
+    <p>הצהרת נגישות זו עודכנה לאחרונה בתאריך <strong>2 ביוני 2026</strong>. ההצהרה מתעדכנת מעת לעת בהתאם לשינויים באתר ובהתאם להתקדמות בתחום הנגישות.</p>
+
+    <div class="note">
+      <strong>הערה:</strong> Pivot Level רואה בנגישות תהליך מתמשך. אם משהו לא עובד עבורכם כראוי — אנא דווחו לנו ונפעל לתיקון. תודה שאתם עוזרים לנו לעשות את האתר טוב יותר עבור כולם.
+    </div>
+  </main>
+
+  <footer class="site">
+    © 2026 Pivot Level Ltd. כל הזכויות שמורות. · נבנה ועוצב באהבה על ידי <a href="https://errn.io" target="_blank" rel="noopener">errn.io</a>
+  </footer>
+</body>
+</html>
