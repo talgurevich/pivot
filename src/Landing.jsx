@@ -4,7 +4,6 @@ import React, { useState as useStateWeb } from 'react';
 import {
   Wordmark,
   DashboardOrders,
-  VANITY_LOGOS,
   Sticker,
   StickerSparkle,
   StickerIcon,
@@ -47,7 +46,6 @@ function LandingWeb({ tweaks = {} }) {
       <SiteHeader blue={blue} />
       <main id="main-content">
         <Hero blue={blue} />
-        <BrandMarquee />
         <Manifesto />
         <MegaStat />
         <HowItWorks />
@@ -565,7 +563,7 @@ function Hero({ blue }) {
                 target="_blank" rel="noopener noreferrer">לראות איך זה עובד <span aria-hidden="true">▷</span></a>
             </div>
             <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)' }}>
-              ✓ 30 ימי התנסות חינם
+              ✓ 30 ימי התנסות
             </div>
           </div>
         </div>
@@ -740,27 +738,6 @@ function BigStat({ n, unit, label }) {
       </div>
       <div style={{ fontSize: 14, fontWeight: 500, color: 'rgba(255,255,255,0.7)' }}>{label}</div>
     </div>
-  );
-}
-
-// ============================================================
-// BRAND MARQUEE — restaurant wordmarks scrolling
-// ============================================================
-function BrandMarquee() {
-  return (
-    <section style={{ background: '#fff', borderTop: '1px solid #E8E8E8', borderBottom: '1px solid #E8E8E8', padding: '40px 0' }}>
-      <div className="pivot-eyebrow" style={{
-        textAlign: 'center', color: '#6F6F6F', marginBottom: 28,
-      }}>נולד מהשטח. נבנה ממסעדן למסעדנים. מחזיר שליטה לחומר שנכנס למסעדה.</div>
-      <ScrollMarquee speed="slow" gap={72}>
-        {[...VANITY_LOGOS, ...VANITY_LOGOS].map((l, i) => (
-          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 72 }}>
-            <div style={{ ...l.style, color: '#6F6F6F', opacity: 0.85, fontSize: 32 }}>{l.name}</div>
-            <StickerSparkle size={14} color="#E8E8E8" />
-          </div>
-        ))}
-      </ScrollMarquee>
-    </section>
   );
 }
 
