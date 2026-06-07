@@ -529,7 +529,7 @@ function Hero({ blue }) {
               marginBottom: 24, marginTop: 0,
               maxWidth: 640,
             }}>
-              המערכת לניהול מלאי למסעדות הראשונה בווטסאפ. ספירות, הזמנות, אישורי מנהל, קליטת סחורה, חשבוניות ותזמונים —
+              המערכת לניהול מלאי למסעדות הראשונה בווטסאפ. ספירות, הזמנות, אישורי מנהל, קליטת סחורה, חשבוניות ותזמונים -
               <span style={{ color: '#fff', fontWeight: 700 }}> במהלך עבודה אחד ברור.</span>
             </p>
 
@@ -693,16 +693,25 @@ function Hero({ blue }) {
               in around the single (smaller) phone. */}
           {HERO_STICKERS.map((s, i) => {
             const m = isMobile ? 0.5 : 1;
+            // On mobile, the front phone takes most of the width — push stickers
+            // sitting near the top of the phone further outward so they don't
+            // overlay the screen content (status bar / app icon area).
+            const topVal = typeof s.pos.top === 'number' ? s.pos.top : null;
+            const overlapsTop = isMobile && topVal !== null && topVal >= 0 && topVal <= 80;
+            const extraTx = overlapsTop ? (s.from === 'left' ? -40 : 40) : 0;
+            const extraTop = overlapsTop ? 24 : 0;
             return (
               <div key={s.name}
                 className={s.from === 'left' ? 'hero-fly-from-left' : 'hero-fly-from-right'}
                 style={{
-                  position: 'absolute', ...s.pos, zIndex: 5,
+                  position: 'absolute', ...s.pos,
+                  ...(extraTop ? { top: topVal + extraTop } : null),
+                  zIndex: 5,
                   animationDelay: `${0.65 + i * 0.06}s`,
                 }}>
                 <Sticker name={s.name} size={Math.round(s.size * m)} style={{
                   display: 'block',
-                  transform: `translateX(${Math.round(s.tx * m)}px) rotate(${s.rot}deg)`,
+                  transform: `translateX(${Math.round(s.tx * m) + extraTx}px) rotate(${s.rot}deg)`,
                   filter: `drop-shadow(${s.shadow})`,
                 }} />
               </div>
@@ -1595,8 +1604,7 @@ function WhatsAppReviews() {
           </div>
         </div>
         <h2 className="pivot-h2" style={{ marginBottom: 56, maxWidth: 900 }}>
-          הביקורות מגיעות לאן שעובדים.<br/>
-          <span style={{ color: '#1A2BFB' }}>בוואטסאפ של פיבוט.</span>
+          <span style={{ color: '#1A2BFB' }}>הביקורות עלינו</span>
         </h2>
 
         {/* Chat thread layout — 2 columns alternating with bubbles */}
