@@ -536,7 +536,7 @@ function Hero({ blue }) {
             {/* Chips row — branded sticker icons */}
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 32 }}>
               {[
-                { s: 'box', t: 'מצבת ברזל' },
+                { s: 'box', t: 'מלאי ברזל' },
                 { s: 'receipt', t: 'חשבוניות' },
                 { s: 'lock', t: 'הרשאות' },
                 { s: 'clock', t: 'תזמונים' },
