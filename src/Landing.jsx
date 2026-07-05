@@ -134,7 +134,7 @@ function Manifesto() {
                 {
                   n: '01',
                   t: 'במקום שעובדים',
-                  body: 'WhatsApp הוא לא ערוץ נוסף — הוא העסק. פיבוט יושבת בדיוק שם, מבלי לבקש לעבור.',
+                  body: 'WhatsApp הוא לא ערוץ נוסף — הוא העסק. Pivot יושבת בדיוק שם, מבלי לבקש לעבור.',
                   shot: 'assets/hero-screenshot.jpg',
                   tilt: 0,
                 },
@@ -914,7 +914,7 @@ function HowItWorks() {
     {
       n: '02',
       title: 'הזמנה',
-      body: 'פיבוט בונה הזמנה לפי מלאי קיים ומצבת בסיס. בדיוק כמה שצריך, לא יותר.',
+      body: 'Pivot בונה הזמנה לפי מלאי קיים ומצבת בסיס. בדיוק כמה שצריך, לא יותר.',
       side: 'אוטומטי · Par Level',
     },
     {
@@ -932,7 +932,7 @@ function HowItWorks() {
     {
       n: '05',
       title: 'ניתוח',
-      body: 'פיבוט מנתחת מגמות מחיר, צריכה וספקים — ומציפה תובנות לפני שהן עולות כסף.',
+      body: 'Pivot מנתחת מגמות מחיר, צריכה וספקים — ומציפה תובנות לפני שהן עולות כסף.',
       side: 'תובנות · מגמות',
     },
   ];
@@ -994,7 +994,7 @@ function BentoFeatures() {
       <LogoWatermark corner="top-right" />
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 24, marginBottom: 32 }}>
-          <div className="pivot-eyebrow" style={{ color: '#1A2BFB' }}>היכולות של פיבוט</div>
+          <div className="pivot-eyebrow" style={{ color: '#1A2BFB' }}>היכולות של Pivot</div>
           <div style={{ flex: 1, height: 1, background: '#E8E8E8' }} />
           <div style={{ fontSize: 14, color: '#6F6F6F' }}>06 כלים · מערכת אחת</div>
         </div>
@@ -1004,7 +1004,7 @@ function BentoFeatures() {
         </h2>
         <p style={{ fontSize: 22, lineHeight: 1.45, color: '#4A4A4A', maxWidth: 700, marginBottom: 56 }}>
           בלי לרדוף. בלי לחפש. בלי לנחש.
-          <b style={{ color: '#000', fontWeight: 700 }}> פיבוט עושה סדר במקום שבו המסעדה בדרך כלל מתפזרת.</b>
+          <b style={{ color: '#000', fontWeight: 700 }}> Pivot עושה סדר במקום שבו המסעדה בדרך כלל מתפזרת.</b>
         </p>
 
         <div style={{
@@ -1303,7 +1303,7 @@ function TalkToInventory() {
           <span style={{ color: '#1A2BFB' }}>כמו שמדברים עם מנהל תפעול.</span>
         </h2>
         <p style={{ fontSize: 22, lineHeight: 1.5, color: '#4A4A4A', maxWidth: 800, marginBottom: 64 }}>
-          שואלים את פיבוט בשפה רגילה — ומקבלים תשובה שאפשר לפעול לפיה.
+          שואלים את Pivot בשפה רגילה — ומקבלים תשובה שאפשר לפעול לפיה.
         </p>
 
         <div style={{
@@ -1409,7 +1409,7 @@ function TalkToInventory() {
             <div role="log"
               aria-live="polite"
               aria-relevant="additions"
-              aria-label="שיחת דמו עם פיבוט"
+              aria-label="שיחת דמו עם Pivot"
               style={{
                 flex: 1, display: 'flex', flexDirection: 'column', gap: 12,
                 direction: 'rtl', padding: '24px 28px',
@@ -1529,15 +1529,15 @@ function Advantages() {
   const items = [
     { n: '02:30', unit: 'שעות / יום', title: 'חוסך זמן', body: 'במקום לרדוף אחרי 30 ספקים בוואטסאפ.' },
     { n: '90%', unit: 'פחות', title: 'מפחית טעויות', body: 'אישור כפול, מחירונים, ובדיקת כמויות אוטומטית.' },
-    { n: '00:00', unit: 'דקות', title: 'בלי לימוד', body: 'המסעדה כבר בוואטסאפ. פיבוט יושב בדיוק שם.' },
-    { n: '22', unit: 'שעות / חודש', title: 'שעות שנחסכות', body: 'הזמן שמתפנה מהתעסקות בהזמנות, ניהול וספירה. ומעבר לכך — כל שעה שהמלאי לא מנוהל בפיבוט מצטברות טעויות שעולות למסעדה זמן וכסף.' },
+    { n: '00:00', unit: 'דקות', title: 'בלי לימוד', body: 'המסעדה כבר בוואטסאפ. Pivot יושב בדיוק שם.' },
+    { n: '22', unit: 'שעות / חודש', title: 'שעות שנחסכות', body: 'הזמן שמתפנה מהתעסקות בהזמנות, ניהול וספירה. ומעבר לכך — כל שעה שהמלאי לא מנוהל בPivot מצטברות טעויות שעולות למסעדה זמן וכסף.' },
   ];
   return (
     <section style={{ background: '#000', color: '#fff', padding: 'clamp(64px, 9vw, 120px) clamp(20px, 5vw, 80px)', position: 'relative', overflow: 'hidden' }}>
       <LogoWatermark corner="bottom-right" dark />
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 24, marginBottom: 56 }}>
-          <div className="pivot-eyebrow" style={{ color: '#1A2BFB' }}>למה פיבוט</div>
+          <div className="pivot-eyebrow" style={{ color: '#1A2BFB' }}>למה Pivot</div>
           <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.2)' }} />
           <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)' }}>03 סיבות</div>
         </div>
@@ -1582,11 +1582,11 @@ function Advantages() {
 // ============================================================
 function WhatsAppReviews() {
   const messages = [
-    { author: 'אביב', role: 'בעלים', avatar: 'א', side: 'right', text: 'אחרי חצי שנה עם פיבוט שמתי לב שאני כמעט לא מדבר עם מנהל המטבח על הזמנות. הכל מתועד, הספקים מקבלים את מה שצריך, והזמן שהתפנה הולך לשיפור תהליכים אחרים במסעדה.', time: 'לפני שבועיים', stars: 5, featured: true },
-    { author: 'אנסטסיה', role: 'מנהלת מטבח', avatar: 'א', side: 'left', text: 'פיבוט הורידה ממני את הלחץ של סוף משמרת — אני רואה מה חסר, שולחת הזמנה מסודרת וממשיכה לעבוד.', time: 'אתמול', stars: 5 },
-    { author: 'דור', role: 'יועץ עסקי', avatar: 'ד', side: 'right', text: 'הכוח של פיבוט הוא שהיא לא משנה למסעדה את ההרגלים — היא פשוט עושה סדר במקום שהכי כואב.', time: 'לפני 4 ימים', stars: 5 },
-    { author: 'תומר', role: 'בעלים', avatar: 'ת', side: 'left', text: 'מאז שפיבוט נכנסה, יש פחות שאלות, פחות טלפונים והרבה יותר שקט סביב ההזמנות.', time: 'לפני שבוע', stars: 5 },
-    { author: 'אלון', role: 'מנהל בר', avatar: 'א', side: 'right', text: 'עם פיבוט לא חסר לי כלום בבר — עד רמת הקישוט, והכל נשאר מתועד בווטסאפ.', time: 'לפני 3 ימים', stars: 5 },
+    { author: 'אביב', role: 'בעלים', avatar: 'א', side: 'right', text: 'אחרי חצי שנה עם Pivot שמתי לב שאני כמעט לא מדבר עם מנהל המטבח על הזמנות. הכל מתועד, הספקים מקבלים את מה שצריך, והזמן שהתפנה הולך לשיפור תהליכים אחרים במסעדה.', time: 'לפני שבועיים', stars: 5, featured: true },
+    { author: 'אנסטסיה', role: 'מנהלת מטבח', avatar: 'א', side: 'left', text: 'Pivot הורידה ממני את הלחץ של סוף משמרת — אני רואה מה חסר, שולחת הזמנה מסודרת וממשיכה לעבוד.', time: 'אתמול', stars: 5 },
+    { author: 'דור', role: 'יועץ עסקי', avatar: 'ד', side: 'right', text: 'הכוח של Pivot הוא שהיא לא משנה למסעדה את ההרגלים — היא פשוט עושה סדר במקום שהכי כואב.', time: 'לפני 4 ימים', stars: 5 },
+    { author: 'תומר', role: 'בעלים', avatar: 'ת', side: 'left', text: 'מאז שPivot נכנסה, יש פחות שאלות, פחות טלפונים והרבה יותר שקט סביב ההזמנות.', time: 'לפני שבוע', stars: 5 },
+    { author: 'אלון', role: 'מנהל בר', avatar: 'א', side: 'right', text: 'עם Pivot לא חסר לי כלום בבר — עד רמת הקישוט, והכל נשאר מתועד בווטסאפ.', time: 'לפני 3 ימים', stars: 5 },
   ];
   return (
     <section id="reviews" style={{ background: '#fff', padding: 'clamp(64px, 9vw, 120px) clamp(20px, 5vw, 80px)', position: 'relative', overflow: 'hidden' }}>
@@ -1756,7 +1756,7 @@ function Waitlist({ blue }) {
         }}>
           <div>
             <p style={{ fontSize: 22, lineHeight: 1.45, color: 'rgba(255,255,255,0.85)', maxWidth: 480, marginBottom: 32 }}>
-              השאירו אימייל ותקבלו גישה מיידית. צוות פיבוט יתקין לכם את כל הספקים תוך 24 שעות.
+              השאירו אימייל ותקבלו גישה מיידית. צוות Pivot יתקין לכם את כל הספקים תוך 24 שעות.
             </p>
             <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
               <BulletItem t="הקמה ב-48 שעות" />
